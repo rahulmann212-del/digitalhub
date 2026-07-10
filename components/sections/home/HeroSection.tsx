@@ -190,8 +190,8 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]" aria-hidden="true" />
 
       {/* ── Container ── */}
-      <div className="container-xl relative z-10 w-full py-24 lg:py-0">
-        <div className="grid min-h-screen grid-cols-1 items-center gap-12 lg:grid-cols-[55fr_45fr]">
+      <div className="container-xl relative z-10 w-full py-20 md:py-24 lg:py-16">
+        <div className="grid items-center gap-16 lg:min-h-[calc(100vh-72px)] lg:grid-cols-[1.1fr_0.9fr]">
 
           {/* ════ LEFT COLUMN ════ */}
           <motion.div
@@ -219,12 +219,12 @@ export default function HeroSection() {
 
             {/* ── Animated headline ── */}
             <motion.h1
-              className="mb-6 overflow-hidden"
+              className="mb-8 overflow-hidden max-w-[700px]"
               variants={wordContainer}
               style={{
-                fontSize: 'clamp(48px, 7vw, 88px)',
+                fontSize: 'clamp(42px, 6vw, 72px)',
                 fontWeight: 800,
-                lineHeight: 1.08,
+                lineHeight: 1.05,
                 letterSpacing: '-0.03em',
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
               }}
@@ -253,7 +253,7 @@ export default function HeroSection() {
             {/* ── Subheadline ── */}
             <motion.p
               variants={fadeUp}
-              className="mb-10 max-w-[500px] text-[18px] leading-relaxed text-[#6B7280]"
+              className="mb-10 max-w-[620px] text-lg leading-8 text-[#6B7280]"
             >
               We design exceptional digital experiences that help ambitious brands grow faster, attract the right customers, and build long term competitive advantage through strategy, technology, and measurable execution.
             </motion.p>
