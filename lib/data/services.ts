@@ -4,11 +4,11 @@ export const services: Service[] = [
   {
     id: 'web-development',
     slug: 'web-development',
-    title: 'Web Development',
-    shortTitle: 'Web Dev',
-    tagline: 'High-performance websites and web applications that convert.',
+    title: 'Custom Web Development',
+    shortTitle: 'Web',
+    tagline: 'Fast, scalable digital experiences built for business growth.',
     description:
-      'We craft fast, scalable web experiences that convert visitors into customers. From custom marketing websites to complex web applications, every project is built on a foundation of performance, accessibility, and modern engineering.',
+      'We design and develop high performance websites, eCommerce platforms, and custom web applications that combine outstanding user experience with measurable business growth. Every solution is built for speed, security, scalability, and long term success.',
     icon: 'Code2',
     capabilities: [
       'Custom Website Design & Development',
@@ -33,9 +33,9 @@ export const services: Service[] = [
     slug: 'digital-marketing',
     title: 'Digital Marketing',
     shortTitle: 'Marketing',
-    tagline: 'Data-driven campaigns that reach the right audience.',
+    tagline: 'Marketing strategies focused on measurable growth and ROI.',
     description:
-      'Data-driven campaigns that put your brand in front of the right audience at exactly the right moment. We build full-funnel marketing systems that consistently generate qualified leads and measurable revenue growth.',
+      'From SEO and paid advertising to content strategy and marketing automation, we create integrated campaigns that generate qualified leads, increase visibility, and maximize return on investment.',
     icon: 'TrendingUp',
     capabilities: [
       'Search Engine Optimization (SEO)',
@@ -58,9 +58,9 @@ export const services: Service[] = [
   {
     id: 'market-research',
     slug: 'market-research',
-    title: 'Market Research',
+    title: 'Strategic Market Research',
     shortTitle: 'Research',
-    tagline: 'Strategic intelligence that drives confident decisions.',
+    tagline: 'Business intelligence that supports confident decisions.',
     description:
       'Decisions backed by data, not assumptions. We provide the competitive intelligence and market insight your business needs to outmanoeuvre competition, find new opportunities, and position your brand for sustainable growth.',
     icon: 'Search',
