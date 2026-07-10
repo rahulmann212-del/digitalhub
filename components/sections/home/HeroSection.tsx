@@ -178,7 +178,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#FFFFFF]"
+      className="relative flex min-h-[780px] w-full items-center overflow-hidden bg-[#FFFFFF]"
       aria-label="Hero section"
       style={{
         backgroundImage: `url("${DOT_GRID_SVG}")`,
@@ -191,7 +191,7 @@ export default function HeroSection() {
 
       {/* ── Container ── */}
       <div className="container-xl relative z-10 w-full py-24 lg:py-0">
-        <div className="grid min-h-screen grid-cols-1 items-center gap-12 lg:grid-cols-[55fr_45fr]">
+        <div className="grid min-h-[780px] grid-cols-1 items-center gap-12 lg:grid-cols-[55fr_45fr]">
 
           {/* ════ LEFT COLUMN ════ */}
           <motion.div
