@@ -28,7 +28,11 @@ const wordReveal = {
 }
 
 // Headline split: last two words get gradient treatment
-const HEADLINE_LINES = ['We Build Digital', 'Products That Drive', 'Real Growth']
+const HEADLINE_LINES = [
+  'Transforming Ideas',
+  'Into Digital',
+  'Success Stories'
+]
 const GRADIENT_WORDS = new Set(['Real', 'Growth'])
 
 // ─── Stat Chip ────────────────────────────────────────────────────────────────
@@ -162,83 +166,6 @@ function HeroIllustration() {
     </svg>
   )
 }
-
-// ─── Dashboard Card Mockup ────────────────────────────────────────────────────
-function DashboardCard() {
-  return (
-    <div
-      className="absolute bottom-8 -left-10 z-20 w-52 rounded-2xl border border-white/60 bg-white/95 p-4 shadow-[0_12px_48px_rgba(37,99,235,0.18)] backdrop-blur-md lg:-left-14"
-      role="img"
-      aria-label="Organic Traffic analytics card showing +247% growth"
-    >
-      {/* Header */}
-      <p className="text-[10px] font-semibold uppercase tracking-widest text-[#6B7280]">
-        Organic Traffic
-      </p>
-
-      {/* Big number */}
-      <p className="mt-1 text-3xl font-extrabold leading-none text-[#16A34A]">+247%</p>
-
-      {/* Mini line chart */}
-      <svg
-        viewBox="0 0 160 48"
-        className="mt-3 h-10 w-full"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2563EB" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        {/* Area fill */}
-        <path
-          d="M0 42 L18 36 L36 30 L54 22 L72 18 L90 12 L108 8 L126 5 L144 3 L160 1 L160 48 L0 48 Z"
-          fill="url(#chart-grad)"
-        />
-        {/* Line */}
-        <path
-          d="M0 42 L18 36 L36 30 L54 22 L72 18 L90 12 L108 8 L126 5 L144 3 L160 1"
-          stroke="#2563EB"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        {/* End dot */}
-        <circle cx="160" cy="1" r="3.5" fill="#2563EB" />
-      </svg>
-
-      {/* Footer */}
-      <p className="mt-2 text-[10px] text-[#9CA3AF]">Last 6 months · Updated today</p>
-
-      {/* Status pill */}
-      <div className="mt-3 flex items-center gap-1.5">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#16A34A]" />
-        <span className="text-[10px] font-semibold text-[#16A34A]">Live Tracking</span>
-      </div>
-    </div>
-  )
-}
-
-// ─── Second floating card ─────────────────────────────────────────────────────
-function SecondaryCard() {
-  return (
-    <div className="absolute right-4 top-10 z-20 flex items-center gap-2.5 rounded-2xl border border-white/60 bg-white/95 px-4 py-3 shadow-[0_8px_32px_rgba(79,70,229,0.15)] backdrop-blur-md">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#4F46E5] to-[#7C3AED]">
-        <svg className="h-4 w-4 text-white" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-          <path d="M2 10l4-4 3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        </svg>
-      </div>
-      <div>
-        <p className="text-xs font-bold text-[#0B0F1A]">Conversions</p>
-        <p className="text-[10px] text-[#6B7280]">+89% this quarter</p>
-      </div>
-    </div>
-  )
-}
-
 // ─── SVG dot-grid background ──────────────────────────────────────────────────
 const DOT_GRID_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23374151' opacity='0.35'/%3E%3C/svg%3E`
 
@@ -286,7 +213,7 @@ export default function HeroSection() {
                   background: 'linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(124,58,237,0.06) 100%)',
                 }}
               >
-                ✦ Award-Winning Digital Agency
+                ✦ Strategy • Design • Technology
               </span>
             </motion.div>
 
@@ -328,8 +255,7 @@ export default function HeroSection() {
               variants={fadeUp}
               className="mb-10 max-w-[500px] text-[18px] leading-relaxed text-[#6B7280]"
             >
-              From high-performance websites to full-scale digital marketing strategies
-              — DigitalHub partners with ambitious companies to create measurable results.
+              We design exceptional digital experiences that help ambitious brands grow faster, attract the right customers, and build long term competitive advantage through strategy, technology, and measurable execution.
             </motion.p>
 
             {/* ── CTA buttons ── */}
@@ -352,7 +278,7 @@ export default function HeroSection() {
                     background: 'linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)',
                   }}
                 >
-                  Start Your Project →
+                  Book Free Strategy Call
                 </Link>
               </motion.div>
 
@@ -367,7 +293,7 @@ export default function HeroSection() {
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F1A] focus-visible:ring-offset-2'
                   )}
                 >
-                  View Our Work
+                  Explore Case Studies
                 </Link>
               </motion.div>
             </motion.div>
@@ -378,9 +304,9 @@ export default function HeroSection() {
               className="flex flex-wrap items-center gap-3"
             >
               {[
-                { icon: '🏆', label: '150+ Projects Delivered' },
-                { icon: '⭐', label: '98% Client Retention' },
-                { icon: '🌍', label: '12 Countries Served' },
+                { icon: '🚀', label: '250+ Successful Projects' },
+                { icon: '🌎', label: 'Clients Across 20+ Countries' },
+                { icon: '💙', label: 'Trusted by Fast Growing Brands' },
               ].map((chip) => (
                 <motion.div key={chip.label} variants={fadeUp}>
                   <StatChip icon={chip.icon} label={chip.label} />
@@ -423,12 +349,6 @@ export default function HeroSection() {
             <div className="animate-float relative z-10 h-[420px] w-[420px] md:h-[500px] md:w-[500px]">
               {/* Main SVG Illustration */}
               <HeroIllustration />
-
-              {/* Dashboard card mockup — floating bottom-left */}
-              <DashboardCard />
-
-              {/* Secondary card — floating top-right */}
-              <SecondaryCard />
             </div>
           </motion.div>
 

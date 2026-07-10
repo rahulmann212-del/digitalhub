@@ -37,7 +37,7 @@ interface ServiceCardProps {
 function ServiceCard({ service, index }: ServiceCardProps) {
   const IconComponent = ICON_MAP[service.icon] ?? Code2
   const iconGradient = GRADIENT_MAP[service.slug] ?? GRADIENT_MAP['web-development']
-  const displayCapabilities = service.capabilities.slice(0, 5)
+  const displayCapabilities = service.capabilities.slice(0, 4)
 
   return (
     <motion.div
@@ -76,7 +76,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       </div>
 
       {/* ── Title ── */}
-      <h3 className="mt-6 text-2xl font-bold leading-tight text-[#0B0F1A]">
+      <h3 className="mt-6 text-3xl font-bold leading-tight text-[#0B0F1A]">
         {service.title}
       </h3>
 
@@ -84,7 +84,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       <p className="mt-1 text-sm font-medium text-[#4F46E5]">{service.tagline}</p>
 
       {/* ── Description ── */}
-      <p className="mt-3 text-base leading-relaxed text-[#374151]">
+      <p className="mt-4 text-[17px] leading-8 text-[#6B7280]">
         {service.description}
       </p>
 
@@ -117,7 +117,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
           )}
           aria-label={`Explore ${service.title} service`}
         >
-          Explore {service.title}
+          View Service
           <ArrowRight size={14} strokeWidth={2.5} />
         </Link>
       </div>
