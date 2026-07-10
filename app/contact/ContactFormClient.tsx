@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useId } from 'react'
+import Link from 'next/link'
 import { Check, Loader2, AlertCircle } from 'lucide-react'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
@@ -172,20 +173,20 @@ export function ContactFormClient() {
           business hours to schedule your free discovery call.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a
-            href="/work"
-            id="contact-success-work-link"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-[#F8F9FC] px-5 py-2.5 text-sm font-semibold text-[#374151] transition-all duration-200 hover:border-[#4F46E5]/30 hover:text-[#4F46E5]"
-          >
-            Explore Our Work
-          </a>
-          <a
-            href="/insights"
-            id="contact-success-insights-link"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-[#F8F9FC] px-5 py-2.5 text-sm font-semibold text-[#374151] transition-all duration-200 hover:border-[#4F46E5]/30 hover:text-[#4F46E5]"
-          >
-            Read Our Insights
-          </a>
+          <Link
+  href="/work"
+  id="contact-success-work-link"
+  className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-[#F8F9FC] px-5 py-2.5 text-sm font-semibold text-[#374151] transition-all duration-200 hover:border-[#4F46E5]/30 hover:text-[#4F46E5]"
+>
+  Explore Our Work
+</Link>
+          <Link
+  href="/insights"
+  id="contact-success-insights-link"
+  className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-[#F8F9FC] px-5 py-2.5 text-sm font-semibold text-[#374151] transition-all duration-200 hover:border-[#4F46E5]/30 hover:text-[#4F46E5]"
+>
+  Read Our Insights
+</Link>
         </div>
       </div>
     )
