@@ -77,187 +77,72 @@ function HeroDashboard() {
         </div>
 
         {/* Revenue */}
-        <div className="mt-8 flex items-center justify-between">
+        <div className="mt-8">
+          <p className="text-sm text-gray-500">
+            Revenue Growth
+          </p>
 
-  <div>
-    <p className="text-sm text-gray-500">
-      Annual Revenue
-    </p>
+          <div className="mt-2 flex items-end gap-3">
+            <h2 className="text-6xl xl:text-7xl font-extrabold tracking-tight text-[#0B0F1A]">
+              +247%
+            </h2>
 
-    <h2 className="mt-2 text-5xl font-extrabold text-[#0B0F1A]">
-      $1.84M
-    </h2>
+            <span className="mb-2 rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+              This Year
+            </span>
+          </div>
+        </div>
 
-    <p className="mt-2 text-sm font-semibold text-green-600">
-      ▲ 38.4% vs last year
-    </p>
-  </div>
+        {/* Chart */}
+        <div className="mt-10 flex h-56 items-end gap-4">
 
-  <div className="relative h-28 w-28">
+          {[35,52,48,66,72,88,104,96,120,140].map((h,index)=>(
+            <div
+              key={index}
+              className="flex-1 rounded-t-full bg-gradient-to-t from-[#2563EB] to-[#7C3AED]"
+              style={{height:h}}
+            />
+          ))}
 
-    <svg
-      viewBox="0 0 120 120"
-      className="h-full w-full -rotate-90"
-    >
-      <circle
-        cx="60"
-        cy="60"
-        r="48"
-        fill="none"
-        stroke="#E5E7EB"
-        strokeWidth="10"
-      />
+        </div>
 
-      <circle
-        cx="60"
-        cy="60"
-        r="48"
-        fill="none"
-        stroke="#2563EB"
-        strokeWidth="10"
-        strokeLinecap="round"
-        strokeDasharray="302"
-        strokeDashoffset="58"
-      />
-    </svg>
+        {/* Bottom Stats */}
 
-    <div className="absolute inset-0 flex items-center justify-center">
+        <div className="mt-8 grid grid-cols-3 gap-4">
 
-      <span className="text-xl font-bold">
-        81%
-      </span>
+          <div className="rounded-2xl bg-[#F8FAFC] p-4">
+            <p className="text-xs text-gray-500">
+              Leads
+            </p>
 
-    </div>
+            <h4 className="mt-2 text-2xl font-bold">
+              4.8K
+            </h4>
+          </div>
 
-  </div>
+          <div className="rounded-2xl bg-[#F8FAFC] p-4">
+            <p className="text-xs text-gray-500">
+              Conversion
+            </p>
 
-</div>
+            <h4 className="mt-2 text-2xl font-bold">
+              18%
+            </h4>
+          </div>
 
-{/* Analytics Chart */}
+          <div className="rounded-2xl bg-[#F8FAFC] p-4">
+            <p className="text-xs text-gray-500">
+              SEO Score
+            </p>
 
-<div className="mt-8 rounded-3xl bg-[#F8FAFC] p-5">
+            <h4 className="mt-2 text-2xl font-bold">
+              97
+            </h4>
+          </div>
 
-  <div className="mb-4 flex items-center justify-between">
+        </div>
 
-    <span className="text-sm font-semibold text-[#0B0F1A]">
-      Performance Trend
-    </span>
-
-    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-      +24%
-    </span>
-
-  </div>
-
-  <svg
-    viewBox="0 0 320 140"
-    className="w-full"
-    fill="none"
-  >
-
-    <defs>
-
-      <linearGradient
-        id="lineGradient"
-        x1="0"
-        y1="0"
-        x2="1"
-        y2="0"
-      >
-        <stop offset="0%" stopColor="#2563EB" />
-        <stop offset="100%" stopColor="#7C3AED" />
-      </linearGradient>
-
-      <linearGradient
-        id="fillGradient"
-        x1="0"
-        y1="0"
-        x2="0"
-        y2="1"
-      >
-        <stop offset="0%" stopColor="#2563EB" stopOpacity="0.20"/>
-        <stop offset="100%" stopColor="#2563EB" stopOpacity="0"/>
-      </linearGradient>
-
-    </defs>
-
-    <path
-      d="M0 120
-         C40 110 70 95 95 90
-         S150 60 185 55
-         S250 40 320 15
-         L320 140
-         L0 140Z"
-      fill="url(#fillGradient)"
-    />
-
-    <path
-      d="M0 120
-         C40 110 70 95 95 90
-         S150 60 185 55
-         S250 40 320 15"
-      stroke="url(#lineGradient)"
-      strokeWidth="4"
-      strokeLinecap="round"
-    />
-
-    <circle cx="320" cy="15" r="6" fill="#2563EB"/>
-
-  </svg>
-
-</div>
-
-        {/* KPI Cards */}
-
-<div className="mt-8 grid grid-cols-3 gap-4">
-
-  {[
-    {
-      title: 'Leads',
-      value: '4.8K',
-      color: 'bg-blue-100',
-      icon: '📈',
-    },
-    {
-      title: 'Sales',
-      value: '$320K',
-      color: 'bg-violet-100',
-      icon: '💰',
-    },
-    {
-      title: 'ROI',
-      value: '6.4x',
-      color: 'bg-emerald-100',
-      icon: '🚀',
-    },
-  ].map((item) => (
-
-    <div
-      key={item.title}
-      className="rounded-3xl border border-[#EEF2F7] bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-    >
-
-      <div
-        className={`mb-3 flex h-10 w-10 items-center justify-center rounded-2xl ${item.color}`}
-      >
-        <span className="text-lg">
-          {item.icon}
-        </span>
       </div>
-
-      <p className="text-xs text-gray-500">
-        {item.title}
-      </p>
-
-      <h4 className="mt-1 text-2xl font-bold text-[#0B0F1A]">
-        {item.value}
-      </h4>
-
-    </div>
-
-  ))}
-
-</div>
 
       {/* Floating Analytics Card */}
 
