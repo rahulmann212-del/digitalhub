@@ -8,6 +8,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Button } from '@/components/ui/Button'
 import { getFeaturedCaseStudies } from '@/lib/data/work'
 import { fadeUp, staggerContainer } from '@/lib/animations'
+import { cn } from '@/lib/utils'
 import type { CaseStudy } from '@/types'
 
 // ─── Case Study Card ──────────────────────────────────────────────────────────
@@ -25,112 +26,81 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
   return (
     <motion.div
       variants={fadeUp}
-      whileHover={{ y: -6, boxShadow: '0 24px 64px rgba(79,70,229,0.18)' }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="group rounded-2xl overflow-hidden cursor-pointer bg-[#F8F9FC] border border-[#E5E7EB] flex flex-col h-full"
-      style={{ transition: 'box-shadow 0.25s ease, transform 0.25s ease' }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className={cn(
+        'group flex h-full cursor-pointer flex-col overflow-hidden rounded-[24px]',
+        'border border-slate-200/70 bg-white',
+        'shadow-sm transition-all duration-300',
+        'hover:border-blue-500/30 hover:shadow-[0_12px_30px_-10px_rgba(37,99,235,0.15)]'
+      )}
     >
-      <Link href={`/work/${study.slug}`} className="flex flex-col h-full">
-        {/* Card body */}
-        <div className={`flex flex-col flex-1 p-6 ${isLarge ? 'md:p-8' : 'p-6'}`}>
+      <Link href={`/work/${study.slug}`} className="flex h-full flex-col">
+        {/* ── Card Body ── */}
+        <div className="flex flex-1 flex-col p-6 lg:p-8">
+          
           {/* Tags */}
-          <div className="flex flex-wrap gap-2">
+          <div className="mb-4 flex flex-wrap gap-2">
             {study.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center rounded-full gradient-soft px-3 py-1 text-xs font-semibold text-[#4F46E5]"
+                className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-500"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          {/* Client */}
-          <p className="mt-4 text-sm font-medium text-[#6B7280]">{study.client}</p>
-
-          {/* Title */}
+          {/* Title & Client */}
+          <p className="mb-1.5 text-xs font-semibold tracking-wide text-slate-400 uppercase">
+            {study.client}
+          </p>
           <h3
-            className={`mt-1 font-bold text-[#0B0F1A] leading-tight tracking-tight ${
+            className={cn(
+              'font-bold leading-tight tracking-tight text-slate-900',
               isLarge ? 'text-2xl md:text-3xl' : 'text-xl'
-            }`}
+            )}
           >
             {study.title}
           </h3>
 
-          {/* Key result — gradient tagline */}
-          <p
-            className={`mt-3 font-extrabold bg-[linear-gradient(135deg,#2563EB_0%,#7C3AED_100%)] bg-clip-text text-transparent leading-tight ${
-              isLarge ? 'text-2xl md:text-3xl' : 'text-xl'
-            }`}
-          >
+          {/* Key result tagline */}
+          <p className="mt-3 text-sm font-semibold text-blue-600 sm:text-base">
             {study.tagline}
           </p>
 
-          {/* Services */}
-          <p className="mt-3 text-xs text-[#6B7280] font-medium">
-            {study.services.join(' · ')}
-          </p>
-
           {/* CTA link */}
-          <div className="mt-auto pt-6 flex items-center gap-1.5 text-sm font-semibold text-[#4F46E5] group-hover:gap-2.5 transition-all duration-200">
-            <span>View Case Study</span>
-            <ArrowRight
-              size={15}
-              className="translate-x-0 group-hover:translate-x-1 transition-transform duration-200"
-            />
+          <div className="mt-auto pt-6">
+            <div className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-blue-800">
+              View Case Study
+              <ArrowRight size={16} strokeWidth={2.5} />
+            </div>
           </div>
         </div>
 
-        {/* Visual area — metric display */}
+        {/* ── Metric Display Area ── */}
         <div
-          className={`gradient-soft border-t border-[#E5E7EB] flex flex-col items-center justify-center text-center relative overflow-hidden ${
-            isLarge ? 'py-10 md:py-14' : 'py-8'
-          }`}
+          className={cn(
+            'relative flex flex-col items-center justify-center overflow-hidden border-t border-slate-100 bg-slate-50/50 text-center',
+            isLarge ? 'p-8 md:p-10' : 'p-6'
+          )}
         >
-          {/* Subtle radial glow */}
-          <div
-            className="absolute inset-0 opacity-40"
-            style={{
-              background:
-                'radial-gradient(ellipse 60% 70% at 50% 50%, rgba(79,70,229,0.12) 0%, transparent 70%)',
-            }}
-          />
-
           {/* Metric value */}
           <span
-            className={`relative font-extrabold bg-[linear-gradient(135deg,#2563EB_0%,#7C3AED_100%)] bg-clip-text text-transparent leading-none tracking-tight ${
-              isLarge ? 'text-5xl md:text-6xl' : 'text-4xl'
-            }`}
+            className={cn(
+              'relative font-extrabold tracking-tight text-slate-900',
+              isLarge ? 'text-4xl md:text-5xl' : 'text-3xl'
+            )}
           >
             {metric.value}
           </span>
-          <span className="relative mt-2 text-xs font-semibold uppercase tracking-widest text-[#6B7280]">
+          <span className="mt-1 relative text-[10px] font-bold uppercase tracking-widest text-slate-500">
             {metric.label}
           </span>
-          <span className="relative mt-1 text-xs text-[#9CA3AF]">{metric.change}</span>
-
-          {/* Subtle grid lines decoration */}
-          <svg
-            className="absolute inset-0 h-full w-full opacity-10"
-            aria-hidden="true"
-          >
-            <defs>
-              <pattern
-                id={`grid-${study.id}`}
-                width="32"
-                height="32"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 32 0 L 0 0 0 32"
-                  fill="none"
-                  stroke="#4F46E5"
-                  strokeWidth="0.5"
-                />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill={`url(#grid-${study.id})`} />
-          </svg>
+          {metric.change && (
+            <span className="mt-0.5 relative text-xs font-medium text-slate-400">
+              {metric.change}
+            </span>
+          )}
         </div>
       </Link>
     </motion.div>
@@ -141,7 +111,7 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
 
 export default function WorkPreview() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-50px' })
   const studies = getFeaturedCaseStudies().slice(0, 4)
 
   // Split: first card large, rest small
@@ -151,14 +121,15 @@ export default function WorkPreview() {
     <section
       id="work-preview"
       ref={ref}
-      className="section-padding bg-[#FFFFFF]"
+      className="relative overflow-hidden bg-slate-50 py-16 sm:py-24 border-t border-slate-200/50"
       aria-label="Featured work"
     >
-      <div className="container-xl">
+      <div className="container mx-auto px-4 sm:px-6">
+        
         {/* Header */}
         <SectionHeader
           eyebrow="Our Work"
-          title="Projects That **Drive** Results"
+          title="Projects That Drive Results"
           subtitle="A selection of our most impactful recent engagements, each built around a specific business challenge."
         />
 
@@ -167,7 +138,7 @@ export default function WorkPreview() {
           variants={staggerContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3"
+          className="mx-auto mt-12 grid max-w-[1200px] grid-cols-1 gap-6 lg:grid-cols-3"
         >
           {/* Large primary card — spans 2 cols on lg */}
           {primary && (
@@ -185,71 +156,62 @@ export default function WorkPreview() {
             </div>
           )}
 
-          {/* Fourth card — full width on sm, 3-col span on lg */}
+          {/* Fourth card — full width on sm, 3-col span on lg (Horizontal Layout) */}
           {studies[3] && (
             <div className="lg:col-span-3">
               <motion.div
                 variants={fadeUp}
-                whileHover={{ y: -4, boxShadow: '0 24px 64px rgba(79,70,229,0.14)' }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="group rounded-2xl overflow-hidden cursor-pointer bg-[#F8F9FC] border border-[#E5E7EB]"
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="group flex cursor-pointer flex-col sm:flex-row overflow-hidden rounded-[24px] border border-slate-200/70 bg-white shadow-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-[0_12px_30px_-10px_rgba(37,99,235,0.15)]"
               >
                 <Link
                   href={`/work/${studies[3].slug}`}
-                  className="flex flex-col sm:flex-row h-full"
+                  className="flex w-full flex-col sm:flex-row"
                 >
-                  {/* Left: content */}
-                  <div className="flex flex-col flex-1 p-6 md:p-8">
-                    <div className="flex flex-wrap gap-2">
+                  {/* Left: Content */}
+                  <div className="flex flex-1 flex-col p-6 lg:p-8">
+                    <div className="mb-4 flex flex-wrap gap-2">
                       {studies[3].tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center rounded-full gradient-soft px-3 py-1 text-xs font-semibold text-[#4F46E5]"
+                          className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-500"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <p className="mt-4 text-sm font-medium text-[#6B7280]">
+                    <p className="mb-1.5 text-xs font-semibold tracking-wide text-slate-400 uppercase">
                       {studies[3].client}
                     </p>
-                    <h3 className="mt-1 text-xl font-bold text-[#0B0F1A] leading-tight tracking-tight">
+                    <h3 className="text-xl md:text-2xl font-bold leading-tight tracking-tight text-slate-900">
                       {studies[3].title}
                     </h3>
-                    <p className="mt-3 text-xl font-extrabold bg-[linear-gradient(135deg,#2563EB_0%,#7C3AED_100%)] bg-clip-text text-transparent leading-tight">
+                    <p className="mt-3 text-sm font-semibold text-blue-600 sm:text-base">
                       {studies[3].tagline}
                     </p>
-                    <p className="mt-3 text-xs text-[#6B7280] font-medium">
-                      {studies[3].services.join(' · ')}
-                    </p>
-                    <div className="mt-auto pt-6 flex items-center gap-1.5 text-sm font-semibold text-[#4F46E5] group-hover:gap-2.5 transition-all duration-200">
-                      <span>View Case Study</span>
-                      <ArrowRight
-                        size={15}
-                        className="translate-x-0 group-hover:translate-x-1 transition-transform duration-200"
-                      />
+                    
+                    <div className="mt-auto pt-6">
+                      <div className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-blue-800">
+                        View Case Study
+                        <ArrowRight size={16} strokeWidth={2.5} />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Right: metrics row */}
-                  <div className="gradient-soft border-t sm:border-t-0 sm:border-l border-[#E5E7EB] sm:w-80 flex items-center justify-center relative overflow-hidden p-8">
-                    <div
-                      className="absolute inset-0 opacity-40"
-                      style={{
-                        background:
-                          'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(79,70,229,0.12) 0%, transparent 70%)',
-                      }}
-                    />
+                  {/* Right: Metrics Row (Horizontal layout for desktop) */}
+                  <div className="relative flex items-center justify-center border-t sm:border-l sm:border-t-0 border-slate-100 bg-slate-50/50 p-8 sm:w-[320px] overflow-hidden">
                     <div className="relative text-center">
-                      <span className="block text-5xl font-extrabold bg-[linear-gradient(135deg,#2563EB_0%,#7C3AED_100%)] bg-clip-text text-transparent leading-none tracking-tight">
+                      <span className="block text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
                         {studies[3].metrics[0].value}
                       </span>
-                      <span className="mt-2 block text-xs font-semibold uppercase tracking-widest text-[#6B7280]">
+                      <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest text-slate-500">
                         {studies[3].metrics[0].label}
                       </span>
-                      <span className="mt-1 block text-xs text-[#9CA3AF]">
-                        {studies[3].metrics[0].change}
-                      </span>
+                      {studies[3].metrics[0].change && (
+                        <span className="mt-0.5 block text-xs font-medium text-slate-400">
+                          {studies[3].metrics[0].change}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Link>
@@ -263,13 +225,14 @@ export default function WorkPreview() {
           variants={fadeUp}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="mt-12 flex justify-center"
+          className="mt-14 flex justify-center"
         >
           <Button
             href="/work"
             variant="secondary"
             size="lg"
-            rightIcon={<ExternalLink size={18} />}
+            rightIcon={<ExternalLink size={16} />}
+            className="rounded-full px-8 py-3.5 text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
           >
             View All Projects
           </Button>
