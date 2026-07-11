@@ -34,9 +34,13 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
         'hover:border-blue-500/30 hover:shadow-[0_12px_30px_-10px_rgba(37,99,235,0.15)]'
       )}
     >
-      <Link href={`/work/${study.slug}`} className="flex h-full flex-col">
-        {/* ── Card Body ── */}
-        <div className="flex flex-1 flex-col p-6 lg:p-8">
+      {/* ── Dynamic Layout: Large screens pe Horizontal, Small pe Vertical ── */}
+      <Link 
+        href={`/work/${study.slug}`} 
+        className={cn("flex h-full", isLarge ? "flex-col lg:flex-row" : "flex-col")}
+      >
+        {/* ── Card Body (Text Area) ── */}
+        <div className={cn("flex flex-1 flex-col justify-center p-6", isLarge ? "lg:p-10 lg:pr-12" : "lg:p-8")}>
           
           {/* Tags */}
           <div className="mb-4 flex flex-wrap gap-2">
@@ -57,19 +61,19 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
           <h3
             className={cn(
               'font-bold leading-tight tracking-tight text-slate-900',
-              isLarge ? 'text-2xl md:text-3xl' : 'text-xl'
+              isLarge ? 'text-2xl lg:text-4xl mb-4' : 'text-xl'
             )}
           >
             {study.title}
           </h3>
 
           {/* Key result tagline */}
-          <p className="mt-3 text-sm font-semibold text-blue-600 sm:text-base">
+          <p className={cn("mt-2 font-semibold text-blue-600", isLarge ? "text-base lg:text-lg" : "text-sm sm:text-base")}>
             {study.tagline}
           </p>
 
           {/* CTA link */}
-          <div className="mt-auto pt-6">
+          <div className={cn("mt-auto pt-6", isLarge ? "lg:mt-8 lg:pt-0" : "")}>
             <div className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-blue-800">
               View Case Study
               <ArrowRight size={16} strokeWidth={2.5} />
@@ -77,27 +81,29 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
           </div>
         </div>
 
-        {/* ── Metric Display Area ── */}
+        {/* ── Metric Display Area (Numbers Area) ── */}
         <div
           className={cn(
-            'relative flex flex-col items-center justify-center overflow-hidden border-t border-slate-100 bg-slate-50/50 text-center',
-            isLarge ? 'p-8 md:p-10' : 'p-6'
+            'relative flex flex-col items-center justify-center overflow-hidden bg-slate-50/50 text-center',
+            isLarge 
+              ? 'border-t lg:border-t-0 lg:border-l border-slate-100 p-8 lg:w-[340px] shrink-0' 
+              : 'border-t border-slate-100 p-6'
           )}
         >
           {/* Metric value */}
           <span
             className={cn(
               'relative font-extrabold tracking-tight text-slate-900',
-              isLarge ? 'text-4xl md:text-5xl' : 'text-3xl'
+              isLarge ? 'text-5xl lg:text-6xl' : 'text-3xl'
             )}
           >
             {metric.value}
           </span>
-          <span className="mt-1 relative text-[10px] font-bold uppercase tracking-widest text-slate-500">
+          <span className="mt-2 relative text-[10px] font-bold uppercase tracking-widest text-slate-500">
             {metric.label}
           </span>
           {metric.change && (
-            <span className="mt-0.5 relative text-xs font-medium text-slate-400">
+            <span className="mt-1 relative text-xs font-medium text-slate-400">
               {metric.change}
             </span>
           )}
@@ -114,7 +120,6 @@ export default function WorkPreview() {
   const inView = useInView(ref, { once: true, margin: '-50px' })
   const studies = getFeaturedCaseStudies().slice(0, 4)
 
-  // Split: first card large, rest small
   const [primary, ...secondary] = studies
 
   return (
@@ -156,66 +161,10 @@ export default function WorkPreview() {
             </div>
           )}
 
-          {/* Fourth card — full width on sm, 3-col span on lg (Horizontal Layout) */}
+          {/* Fourth card — full width on sm, 3-col span on lg */}
           {studies[3] && (
             <div className="lg:col-span-3">
-              <motion.div
-                variants={fadeUp}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group flex cursor-pointer flex-col sm:flex-row overflow-hidden rounded-[24px] border border-slate-200/70 bg-white shadow-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-[0_12px_30px_-10px_rgba(37,99,235,0.15)]"
-              >
-                <Link
-                  href={`/work/${studies[3].slug}`}
-                  className="flex w-full flex-col sm:flex-row"
-                >
-                  {/* Left: Content */}
-                  <div className="flex flex-1 flex-col p-6 lg:p-8">
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      {studies[3].tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-500"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="mb-1.5 text-xs font-semibold tracking-wide text-slate-400 uppercase">
-                      {studies[3].client}
-                    </p>
-                    <h3 className="text-xl md:text-2xl font-bold leading-tight tracking-tight text-slate-900">
-                      {studies[3].title}
-                    </h3>
-                    <p className="mt-3 text-sm font-semibold text-blue-600 sm:text-base">
-                      {studies[3].tagline}
-                    </p>
-                    
-                    <div className="mt-auto pt-6">
-                      <div className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-blue-800">
-                        View Case Study
-                        <ArrowRight size={16} strokeWidth={2.5} />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right: Metrics Row (Horizontal layout for desktop) */}
-                  <div className="relative flex items-center justify-center border-t sm:border-l sm:border-t-0 border-slate-100 bg-slate-50/50 p-8 sm:w-[320px] overflow-hidden">
-                    <div className="relative text-center">
-                      <span className="block text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-                        {studies[3].metrics[0].value}
-                      </span>
-                      <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                        {studies[3].metrics[0].label}
-                      </span>
-                      {studies[3].metrics[0].change && (
-                        <span className="mt-0.5 block text-xs font-medium text-slate-400">
-                          {studies[3].metrics[0].change}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
+              <CaseStudyCard study={studies[3]} variant="large" index={3} />
             </div>
           )}
         </motion.div>
