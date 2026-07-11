@@ -217,6 +217,7 @@ function HeroDashboard() {
   </p>
 
 </div>
+</div>
   )
 }
 // ─── SVG dot-grid background ──────────────────────────────────────────────────
