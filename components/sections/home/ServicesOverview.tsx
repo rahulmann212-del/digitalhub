@@ -40,9 +40,9 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       variants={fadeUp}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={cn(
-        'group relative flex h-full flex-col rounded-[24px]', // Thoda compact curve
+        'group relative flex h-full flex-col rounded-[24px]',
         'border border-slate-200/70 bg-white',
-        'p-6 lg:p-7', // Padding kam kar di gayi hai khali space hatane ke liye
+        'p-6 lg:p-7 lg:px-8', 
         'shadow-sm transition-all duration-300',
         'hover:border-blue-500/30 hover:shadow-[0_12px_30px_-10px_rgba(37,99,235,0.15)]'
       )}
@@ -58,39 +58,36 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         aria-hidden="true"
       />
 
-      {/* ── Icon & Badge Row ── */}
-      <div className="mb-5 flex items-center justify-between">
+      {/* ── Clean Icon Area ── */}
+      <div className="mb-6">
         <div
-          className="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner"
+          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl shadow-sm border border-white/20"
           style={{ background: iconGradient }}
         >
-          <IconComponent className="text-white" size={22} strokeWidth={2} />
+          <IconComponent className="text-white" size={26} strokeWidth={2} />
         </div>
-        <span className="rounded-full bg-slate-50 border border-slate-200 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-500">
-          {service.shortTitle}
-        </span>
       </div>
 
       {/* ── Title ── */}
-      <h3 className="mb-2.5 text-xl font-bold leading-snug tracking-tight text-slate-900">
+      <h3 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-slate-900">
         {service.title}
       </h3>
 
       {/* ── Description ── */}
-      <p className="mb-5 text-sm leading-relaxed text-slate-600">
+      <p className="mb-6 text-sm leading-relaxed text-slate-600">
         {service.description}
       </p>
 
       {/* ── Divider ── */}
-      <div className="mb-5 h-px w-full bg-slate-100" aria-hidden="true" />
+      <div className="mb-6 h-px w-full bg-slate-100" aria-hidden="true" />
 
-      {/* ── Capabilities list (Tight spacing) ── */}
-      <ul className="mb-6 flex flex-col gap-2.5" aria-label={`${service.title} capabilities`}>
+      {/* ── Capabilities list ── */}
+      <ul className="mb-8 flex flex-col gap-3" aria-label={`${service.title} capabilities`}>
         {displayCapabilities.map((cap) => (
-          <li key={cap} className="flex items-start gap-2.5">
+          <li key={cap} className="flex items-start gap-3">
             <Check
-              size={16}
-              strokeWidth={3}
+              size={18}
+              strokeWidth={2.5}
               className="mt-0.5 shrink-0 text-blue-600"
               aria-hidden="true"
             />
@@ -100,14 +97,13 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       </ul>
 
       {/* ── CTA Link ── */}
-      {/* mt-auto yahan rakha hai taaki button hamesha bottom me rahe, aur upar ka text compact rahe */}
-      <div className="mt-auto pt-2">
+      <div className="mt-auto">
         <Link
           href={`/services/${service.slug}`}
           id={`service-cta-${service.slug}`}
           className={cn(
-            'inline-flex items-center gap-1.5 text-sm font-bold text-blue-600',
-            'transition-all duration-300 hover:gap-2.5 hover:text-blue-800'
+            'inline-flex items-center gap-2 text-sm font-bold text-blue-600',
+            'transition-all duration-300 hover:gap-3 hover:text-blue-800'
           )}
           aria-label={`Explore ${service.title} service`}
         >
@@ -128,7 +124,7 @@ interface SectionHeaderProps {
 
 function SectionHeader({ eyebrow, title, subtitle }: SectionHeaderProps) {
   return (
-    <div className="mb-12 sm:mb-14 text-center">
+    <div className="mb-14 sm:mb-16 text-center">
       <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#4F46E5]/15 bg-[#4F46E5]/5 px-3 py-1.5 text-xs font-semibold text-[#4F46E5]">
         <span className="animate-pulse">✦</span> {eyebrow}
       </span>
@@ -151,7 +147,7 @@ export default function ServicesOverview() {
     <section
       ref={sectionRef}
       id="services-overview"
-      className="relative overflow-hidden bg-white py-16 sm:py-20" // Section ka padding chhota kiya hai
+      className="relative overflow-hidden bg-white py-16 sm:py-24" 
       aria-label="Services overview"
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -193,7 +189,7 @@ export default function ServicesOverview() {
 
         {/* ── Bottom CTA row ── */}
         <motion.div
-          className="mt-12 sm:mt-16 text-center"
+          className="mt-14 sm:mt-16 text-center"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
