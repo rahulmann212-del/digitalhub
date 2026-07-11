@@ -77,21 +77,61 @@ function HeroDashboard() {
         </div>
 
         {/* Revenue */}
-        <div className="mt-8">
-          <p className="text-sm text-gray-500">
-            Revenue Growth
-          </p>
+        <div className="mt-8 flex items-center justify-between">
 
-          <div className="mt-2 flex items-end gap-3">
-            <h2 className="text-6xl xl:text-7xl font-extrabold tracking-tight text-[#0B0F1A]">
-              +247%
-            </h2>
+  <div>
+    <p className="text-sm text-gray-500">
+      Annual Revenue
+    </p>
 
-            <span className="mb-2 rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
-              This Year
-            </span>
-          </div>
-        </div>
+    <h2 className="mt-2 text-5xl font-extrabold text-[#0B0F1A]">
+      $1.84M
+    </h2>
+
+    <p className="mt-2 text-sm font-semibold text-green-600">
+      ▲ 38.4% vs last year
+    </p>
+  </div>
+
+  <div className="relative h-28 w-28">
+
+    <svg
+      viewBox="0 0 120 120"
+      className="h-full w-full -rotate-90"
+    >
+      <circle
+        cx="60"
+        cy="60"
+        r="48"
+        fill="none"
+        stroke="#E5E7EB"
+        strokeWidth="10"
+      />
+
+      <circle
+        cx="60"
+        cy="60"
+        r="48"
+        fill="none"
+        stroke="#2563EB"
+        strokeWidth="10"
+        strokeLinecap="round"
+        strokeDasharray="302"
+        strokeDashoffset="58"
+      />
+    </svg>
+
+    <div className="absolute inset-0 flex items-center justify-center">
+
+      <span className="text-xl font-bold">
+        81%
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
         {/* Chart */}
         <div className="mt-10 flex h-56 items-end gap-4">
