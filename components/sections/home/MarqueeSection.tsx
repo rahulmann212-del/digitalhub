@@ -26,7 +26,6 @@ interface MarqueeTrackProps {
 }
 
 function MarqueeTrack({ reversed = false }: MarqueeTrackProps) {
-  // Original array is enough, we duplicate the whole <ul> block below
   const items = COMPANIES
 
   return (
@@ -42,11 +41,12 @@ function MarqueeTrack({ reversed = false }: MarqueeTrackProps) {
       >
         {items.map((name, idx) => (
           <li key={`${name}-${idx}`} className="flex shrink-0 items-center px-6 sm:px-10">
-            <span className="cursor-default text-lg font-bold tracking-wide text-gray-400/70 transition-colors duration-300 hover:text-gray-900">
+            {/* Text darkened and made semi-bold for better visibility */}
+            <span className="cursor-default text-lg sm:text-xl font-semibold tracking-wide text-slate-700 transition-colors duration-300 hover:text-[#2563EB]">
               {name}
             </span>
-            {/* Separator dot */}
-            <span className="ml-6 sm:ml-10 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300/80" aria-hidden="true" />
+            {/* Separator dot slightly darkened */}
+            <span className="ml-6 sm:ml-10 h-2 w-2 shrink-0 rounded-full bg-slate-300" aria-hidden="true" />
           </li>
         ))}
       </ul>
@@ -62,10 +62,10 @@ function MarqueeTrack({ reversed = false }: MarqueeTrackProps) {
       >
         {items.map((name, idx) => (
           <li key={`dup-${name}-${idx}`} className="flex shrink-0 items-center px-6 sm:px-10">
-            <span className="cursor-default text-lg font-bold tracking-wide text-gray-400/70 transition-colors duration-300 hover:text-gray-900">
+            <span className="cursor-default text-lg sm:text-xl font-semibold tracking-wide text-slate-700 transition-colors duration-300 hover:text-[#2563EB]">
               {name}
             </span>
-            <span className="ml-6 sm:ml-10 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300/80" aria-hidden="true" />
+            <span className="ml-6 sm:ml-10 h-2 w-2 shrink-0 rounded-full bg-slate-300" aria-hidden="true" />
           </li>
         ))}
       </ul>
@@ -78,19 +78,21 @@ export default function MarqueeSection() {
   return (
     <section
       id="trusted-by"
-      className="relative overflow-hidden bg-white py-16 sm:py-20"
+      // Background changed to a very subtle Slate/Blue tint (#F8FAFC) to alternate with pure white
+      className="relative overflow-hidden bg-slate-50 py-16 sm:py-20 border-y border-slate-200/50"
       aria-label="Trusted by companies worldwide"
     >
       {/* ── Title ── */}
       <div className="container mx-auto px-4">
-        <p className="mb-10 text-center text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
+        {/* Title darkened and spaced out for a premium look */}
+        <p className="mb-10 text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
           Trusted by innovative companies worldwide
         </p>
       </div>
 
       {/* ── Wrapper with enhanced fade masks ── */}
       <div
-        className="relative flex flex-col gap-6 sm:gap-8"
+        className="relative flex flex-col gap-8 sm:gap-10"
         style={{
           maskImage:
             'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
@@ -104,16 +106,6 @@ export default function MarqueeSection() {
         {/* ── Second marquee row (right→left) ── */}
         <MarqueeTrack reversed={true} />
       </div>
-
-      {/* ── Top & Bottom subtle borders (Clean Premium Look) ── */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-60"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-60"
-        aria-hidden="true"
-      />
     </section>
   )
 }
