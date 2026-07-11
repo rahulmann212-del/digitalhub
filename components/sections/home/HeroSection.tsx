@@ -51,119 +51,124 @@ function StatChip({ icon, label }: StatChipProps) {
 }
 
 // ─── Abstract SVG Illustration ────────────────────────────────────────────────
-function HeroIllustration() {
+function HeroDashboard() {
   return (
-    <svg
-      viewBox="0 0 520 520"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-full w-full"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="grad-main" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2563EB" />
-          <stop offset="100%" stopColor="#7C3AED" />
-        </linearGradient>
-        <linearGradient id="grad-soft" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.25" />
-        </linearGradient>
-        <linearGradient id="grad-arc" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#4F46E5" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.3" />
-        </linearGradient>
-        <linearGradient id="grad-ring" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2563EB" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.1" />
-        </linearGradient>
-        <radialGradient id="glow-center" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#4F46E5" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#4F46E5" stopOpacity="0" />
-        </radialGradient>
-      </defs>
+    <div className="relative mx-auto w-full max-w-[520px]">
 
-      {/* Background glow */}
-      <circle cx="260" cy="260" r="240" fill="url(#glow-center)" />
+      {/* Main Card */}
+      <div className="rounded-[32px] border border-white/70 bg-white/90 p-7 shadow-[0_30px_80px_rgba(37,99,235,0.18)] backdrop-blur-xl">
 
-      {/* Large primary circle */}
-      <circle cx="260" cy="260" r="180" fill="url(#grad-main)" opacity="0.92" />
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-500">Growth Overview</p>
+            <h3 className="mt-1 text-2xl font-bold text-[#0B0F1A]">
+              Performance Dashboard
+            </h3>
+          </div>
 
-      {/* Soft overlapping circles */}
-      <circle cx="360" cy="160" r="110" fill="url(#grad-soft)" />
-      <circle cx="140" cy="370" r="130" fill="url(#grad-soft)" />
-      <circle cx="390" cy="350" r="80" fill="url(#grad-arc)" opacity="0.55" />
+          <div className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">
+            Live
+          </div>
+        </div>
 
-      {/* Outer ring */}
-      <circle
-        cx="260"
-        cy="260"
-        r="210"
-        stroke="url(#grad-ring)"
-        strokeWidth="1.5"
-        strokeDasharray="8 6"
-      />
-      <circle
-        cx="260"
-        cy="260"
-        r="240"
-        stroke="url(#grad-ring)"
-        strokeWidth="1"
-        strokeDasharray="4 8"
-        opacity="0.5"
-      />
+        {/* Revenue */}
+        <div className="mt-8">
+          <p className="text-sm text-gray-500">
+            Revenue Growth
+          </p>
 
-      {/* Arc curves */}
-      <path
-        d="M 60 260 Q 160 80 320 100"
-        stroke="url(#grad-arc)"
-        strokeWidth="3"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.8"
-      />
-      <path
-        d="M 200 460 Q 380 440 440 280"
-        stroke="url(#grad-arc)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.55"
-      />
+          <div className="mt-2 flex items-end gap-3">
+            <h2 className="text-5xl font-extrabold text-[#0B0F1A]">
+              +247%
+            </h2>
 
-      {/* Small accent circles */}
-      <circle cx="80" cy="160" r="18" fill="#2563EB" opacity="0.35" />
-      <circle cx="440" cy="420" r="14" fill="#7C3AED" opacity="0.4" />
-      <circle cx="460" cy="160" r="10" fill="#4F46E5" opacity="0.5" />
-      <circle cx="110" cy="400" r="8" fill="#7C3AED" opacity="0.3" />
+            <span className="mb-2 rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+              This Year
+            </span>
+          </div>
+        </div>
 
-      {/* Inner highlight circle */}
-      <circle cx="220" cy="220" r="70" fill="white" opacity="0.06" />
+        {/* Chart */}
+        <div className="mt-8 flex h-40 items-end gap-3">
 
-      {/* Dot grid pattern */}
-      {Array.from({ length: 8 }).map((_, row) =>
-        Array.from({ length: 8 }).map((_, col) => {
-          const x = 30 + col * 64
-          const y = 30 + row * 64
-          const dist = Math.sqrt((x - 260) ** 2 + (y - 260) ** 2)
-          if (dist < 160 || dist > 270) return null
-          return (
-            <circle
-              key={`${row}-${col}`}
-              cx={x}
-              cy={y}
-              r="2.5"
-              fill="#94A3B8"
-              opacity="0.22"
+          {[35,52,48,66,72,88,104,96,120,140].map((h,index)=>(
+            <div
+              key={index}
+              className="flex-1 rounded-t-full bg-gradient-to-t from-[#2563EB] to-[#7C3AED]"
+              style={{height:h}}
             />
-          )
-        })
-      )}
+          ))}
 
-      {/* White sparkle / star overlay */}
-      <circle cx="260" cy="260" r="12" fill="white" opacity="0.18" />
-      <circle cx="260" cy="260" r="5" fill="white" opacity="0.55" />
-    </svg>
+        </div>
+
+        {/* Bottom Stats */}
+
+        <div className="mt-8 grid grid-cols-3 gap-4">
+
+          <div className="rounded-2xl bg-[#F8FAFC] p-4">
+            <p className="text-xs text-gray-500">
+              Leads
+            </p>
+
+            <h4 className="mt-2 text-2xl font-bold">
+              4.8K
+            </h4>
+          </div>
+
+          <div className="rounded-2xl bg-[#F8FAFC] p-4">
+            <p className="text-xs text-gray-500">
+              Conversion
+            </p>
+
+            <h4 className="mt-2 text-2xl font-bold">
+              18%
+            </h4>
+          </div>
+
+          <div className="rounded-2xl bg-[#F8FAFC] p-4">
+            <p className="text-xs text-gray-500">
+              SEO Score
+            </p>
+
+            <h4 className="mt-2 text-2xl font-bold">
+              97
+            </h4>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Floating Card */}
+
+      <div className="absolute -left-12 top-16 rounded-3xl bg-white p-5 shadow-xl">
+
+        <p className="text-xs text-gray-500">
+          Organic Traffic
+        </p>
+
+        <h3 className="mt-2 text-3xl font-bold text-green-600">
+          +184%
+        </h3>
+
+      </div>
+
+      {/* Floating Card */}
+
+      <div className="absolute -right-10 bottom-10 rounded-3xl bg-white p-5 shadow-xl">
+
+        <p className="text-xs text-gray-500">
+          Active Users
+        </p>
+
+        <h3 className="mt-2 text-3xl font-bold text-[#2563EB]">
+          24K
+        </h3>
+
+      </div>
+
+    </div>
   )
 }
 // ─── SVG dot-grid background ──────────────────────────────────────────────────
@@ -348,7 +353,7 @@ export default function HeroSection() {
             {/* ── Floating visual wrapper ── */}
             <div className="animate-float relative z-10 h-[420px] w-[420px] md:h-[500px] md:w-[500px]">
               {/* Main SVG Illustration */}
-              <HeroIllustration />
+              <HeroDashboard />
             </div>
           </motion.div>
 
