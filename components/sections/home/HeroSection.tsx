@@ -52,9 +52,9 @@ function StatChip({ icon, label }: StatChipProps) {
 // ─── Abstract SVG Illustration (Scaled Down) ──────────────────────────────────
 function HeroDashboard() {
   return (
-    <div className="relative mx-auto w-full max-w-[380px] lg:max-w-[500px]">
+    <div className="relative mx-auto w-full max-w-[380px] lg:max-w-[480px]">
       {/* Main Card */}
-      <div className="rounded-[24px] border border-white/80 bg-white/90 p-6 lg:p-8 shadow-[0_20px_80px_rgba(37,99,235,0.12)] backdrop-blur-xl">
+      <div className="rounded-[24px] border border-white/80 bg-white/90 p-6 lg:p-8 shadow-[0_20px_80px_rgba(37,99,235,0.12)] backdrop-blur-xl relative z-10">
         
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -105,7 +105,7 @@ function HeroDashboard() {
       </div>
 
       {/* Floating Analytics Card */}
-      <div className="absolute -left-4 lg:-left-12 top-8 w-40 lg:w-48 rounded-[20px] border border-white/70 bg-white/95 p-4 shadow-[0_15px_40px_rgba(37,99,235,0.12)] backdrop-blur-xl">
+      <div className="absolute -left-2 lg:-left-10 top-8 w-40 lg:w-48 rounded-[20px] border border-white/70 bg-white/95 p-4 shadow-[0_15px_40px_rgba(37,99,235,0.12)] backdrop-blur-xl z-20">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[10px] font-medium text-gray-500">Organic Growth</p>
@@ -121,7 +121,7 @@ function HeroDashboard() {
       </div>
 
       {/* Floating Clients Card */}
-      <div className="absolute -right-2 lg:-right-8 bottom-8 w-40 lg:w-48 rounded-[20px] border border-white/70 bg-white/95 p-4 shadow-[0_15px_40px_rgba(124,58,237,0.12)] backdrop-blur-xl">
+      <div className="absolute -right-2 lg:-right-8 bottom-8 w-40 lg:w-48 rounded-[20px] border border-white/70 bg-white/95 p-4 shadow-[0_15px_40px_rgba(124,58,237,0.12)] backdrop-blur-xl z-20">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[10px] font-medium text-gray-500">Active Clients</p>
@@ -142,9 +142,6 @@ function HeroDashboard() {
   )
 }
 
-// ─── SVG dot-grid background (Made more subtle) ───────────────────────────────
-const DOT_GRID_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='2' cy='2' r='1' fill='%2394A3B8' opacity='0.20'/%3E%3C/svg%3E`
-
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -154,23 +151,27 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-[80vh] w-full items-center overflow-hidden bg-[#FAFAFA]"
+      // w-full, max-w-[100vw] aur overflow-x-hidden se horizontal scroll ka issue solve ho jayega
+      className="relative flex min-h-[80vh] w-full max-w-[100vw] items-center overflow-x-hidden bg-[#FAFAFA]"
       aria-label="Hero section"
     >
-      {/* ── Modern Corporate Background Gradients ── */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(239,246,255,0.7),_transparent_50%)]" />
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(243,232,255,0.6),_transparent_50%)]" />
+      {/* ── BACKGROUND DESIGNS ── */}
       
-      {/* ── Subtle dot grid overlay ── */}
+      {/* 1. Modern Grid Background */}
       <div 
-        className="pointer-events-none absolute inset-0 z-0" 
+        className="absolute inset-0 z-0 opacity-40"
         style={{
-          backgroundImage: `url("${DOT_GRID_SVG}")`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '32px 32px',
-        }} 
-        aria-hidden="true" 
+          backgroundImage: `linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 100%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 100%)'
+        }}
+        aria-hidden="true"
       />
+
+      {/* 2. Ambient Glowing Orbs */}
+      <div className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-blue-400/20 mix-blend-multiply blur-[100px] lg:blur-[120px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-purple-400/20 mix-blend-multiply blur-[100px] lg:blur-[120px]" aria-hidden="true" />
 
       {/* ── Container ── */}
       <div className="container mx-auto px-4 md:px-6 relative z-10 w-full py-16 md:py-20 lg:py-24">
