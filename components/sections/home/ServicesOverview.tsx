@@ -49,9 +49,9 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       }}
       initial={{ boxShadow: SHADOW_DEFAULT }}
       className={cn(
-  'group relative flex h-full flex-col rounded-[32px]',
+  'group relative flex min-h-[620px] flex-col rounded-[32px]',
   'border border-[#ECEEF5] bg-white',
-  'p-12',
+  'px-10 py-12',
   'transition-all duration-500',
   'hover:-translate-y-2',
   'hover:border-[#4F46E5]/20'
@@ -79,7 +79,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       </div>
 
       {/* ── Title ── */}
-      <h3 className="mt-10 text-[40px] leading-[1.05] font-bold leading-tight text-[#0B0F1A]">
+      <h3 className="mt-10 text-[32px] leading-tight font-bold leading-tight text-[#0B0F1A]">
         {service.title}
       </h3>
 
@@ -110,7 +110,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       </ul>
 
       {/* ── CTA Link ── */}
-      <div className="mt-10">
+      <div className="mt-auto pt-8">
         <Link
           href={`/services/${service.slug}`}
           id={`service-cta-${service.slug}`}
@@ -196,7 +196,7 @@ export default function ServicesOverview() {
 
         {/* ── Cards grid ── */}
         <motion.div
-          className="grid grid-cols-1 gap-10 lg:grid-cols-3 items-stretch"
+          className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3"
           variants={staggerContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
