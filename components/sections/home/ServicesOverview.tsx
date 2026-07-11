@@ -71,40 +71,47 @@ function ServiceCard({ service, index }: ServiceCardProps) {
 
       {/* ── Icon container ── */}
       <div
-        className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl text-white"
-        style={{ background: iconGradient }}
-        aria-hidden="true"
-      >
-        <IconComponent size={34} strokeWidth={2} />
-      </div>
-
+  className="absolute left-0 top-0 h-36 w-full rounded-t-[32px]"
+  style={{ background: iconGradient }}
+>
+  <div className="flex h-full items-center justify-center">
+    <span className="text-lg font-bold uppercase tracking-[3px] text-white">
+      {service.shortTitle}
+    </span>
+  </div>
+</div>
+<div className="mt-40">
+  <span className="rounded-full bg-[#EEF2FF] px-4 py-2 text-sm font-medium text-[#4F46E5]">
+    {service.shortTitle}
+  </span>
+</div>
       {/* ── Title ── */}
-      <h3 className="mt-10 text-[32px] leading-tight font-bold leading-tight text-[#0B0F1A]">
+      <h3 className="mt-6 text-[40px] font-extrabold leading-[1.08] tracking-[-0.03em] text-[#0B0F1A]">
         {service.title}
       </h3>
 
       {/* ── Tagline ── */}
-      <p className="mt-4 text-base font-medium text-[#4F46E5]">{service.tagline}</p>
+      {/*<p className="mt-4 text-base font-medium text-[#4F46E5]">{service.tagline}</p>*/}
 
       {/* ── Description ── */}
-      <p className="mt-10 gap-4 text-[18px] leading-9 text-[#6B7280]">
+      <p className="mt-6 text-lg leading-8 text-[#6B7280]">
         {service.description}
       </p>
 
       {/* ── Divider ── */}
-      <div className="mt-10 border-t border-[#F1F3F9]" aria-hidden="true" />
+      {/*<div className="mt-10 border-t border-[#F1F3F9]" aria-hidden="true" />*/}
 
       {/* ── Capabilities list ── */}
       <ul className="mt-10 gap-4 flex flex-1 flex-col gap-2.5" aria-label={`${service.title} capabilities`}>
         {displayCapabilities.map((cap) => (
           <li key={cap} className="flex items-start gap-2.5">
             <Check
-              size={15}
+              size={18}
               strokeWidth={2.5}
               className="mt-0.5 shrink-0 text-[#4F46E5]"
               aria-hidden="true"
             />
-            <span className="text-base text-[#374151]">{cap}</span>
+            <span className="text-[17px] font-medium text-[#374151]">{cap}</span>
           </li>
         ))}
       </ul>
