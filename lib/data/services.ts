@@ -8,18 +8,14 @@ export const services: Service[] = [
     shortTitle: 'Web',
     tagline: 'Fast, scalable digital experiences built for business growth.',
     description:
-      'We design and develop high performance websites, eCommerce platforms, and custom web applications that combine outstanding user experience with measurable business growth. Every solution is built for speed, security, scalability, and long term success.',
+      'Modern websites and web applications designed for speed, scalability, and measurable business growth.',
     icon: 'Code2',
     capabilities: [
-      'Custom Website Design & Development',
-      'Web Application Development',
-      'E-Commerce Solutions (Shopify, WooCommerce)',
-      'Performance Optimization & Core Web Vitals',
-      'CMS Integration (WordPress, Contentful, Sanity)',
-      'Progressive Web Apps (PWA)',
-      'API Development & Third-Party Integrations',
-      'Ongoing Maintenance & Support',
-    ],
+'Custom Websites',
+'Web Applications',
+'Ecommerce',
+'SEO Optimized'
+],
     outcomes: [
       'Sub-2-second page load times',
       'Lighthouse scores above 95',
@@ -35,18 +31,14 @@ export const services: Service[] = [
     shortTitle: 'Marketing',
     tagline: 'Marketing strategies focused on measurable growth and ROI.',
     description:
-      'From SEO and paid advertising to content strategy and marketing automation, we create integrated campaigns that generate qualified leads, increase visibility, and maximize return on investment.',
+      'Performance driven marketing campaigns that increase visibility, generate qualified leads, and improve ROI.',
     icon: 'TrendingUp',
     capabilities: [
-      'Search Engine Optimization (SEO)',
-      'Pay-Per-Click Advertising (Google, Meta, LinkedIn)',
-      'Social Media Strategy & Management',
-      'Email Marketing Automation',
-      'Conversion Rate Optimization (CRO)',
-      'Content Marketing & Strategy',
-      'Marketing Analytics & Attribution',
-      'Remarketing & Audience Segmentation',
-    ],
+'SEO',
+'Google Ads',
+'Social Media',
+'Email Marketing'
+],
     outcomes: [
       'Consistent month-over-month traffic growth',
       'Qualified lead generation at target CPL',
@@ -62,18 +54,14 @@ export const services: Service[] = [
     shortTitle: 'Research',
     tagline: 'Business intelligence that supports confident decisions.',
     description:
-      'Decisions backed by data, not assumptions. We provide the competitive intelligence and market insight your business needs to outmanoeuvre competition, find new opportunities, and position your brand for sustainable growth.',
+      'Research and competitive intelligence that help businesses identify opportunities and make confident decisions.',
     icon: 'Search',
     capabilities: [
-      'Competitor Analysis & Benchmarking',
-      'Customer Persona Development',
-      'Industry & Market Trend Analysis',
-      'User Behaviour & UX Research',
-      'Brand Perception Audits',
-      'Market Sizing & Opportunity Assessment',
-      'Customer Journey Mapping',
-      'Qualitative & Quantitative Research',
-    ],
+'Competitor Analysis',
+'Market Trends',
+'Customer Research',
+'Market Sizing'
+],
     outcomes: [
       'Validated product-market fit insights',
       'Identified untapped market opportunities',

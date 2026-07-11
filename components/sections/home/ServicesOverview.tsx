@@ -49,7 +49,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       }}
       initial={{ boxShadow: SHADOW_DEFAULT }}
       className={cn(
-  'group relative flex min-h-[620px] flex-col rounded-[32px]',
+  'group relative flex min-h-[560px] flex-col rounded-[32px]',
   'border border-[#ECEEF5] bg-white',
   'px-10 py-12',
   'transition-all duration-500',
@@ -196,7 +196,7 @@ export default function ServicesOverview() {
 
         {/* ── Cards grid ── */}
         <motion.div
-          className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3"
+          className="mx-auto grid max-w-[1450px] grid-cols-1 gap-8 lg:grid-cols-[1fr_1fr_1fr]"
           variants={staggerContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
