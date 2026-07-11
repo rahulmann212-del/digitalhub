@@ -26,7 +26,7 @@ const GRADIENT_MAP: Record<string, string> = {
 
 // ─── Shadow brand (hover) ─────────────────────────────────────────────────────
 const SHADOW_BRAND = '0 16px 48px rgba(79, 70, 229, 0.22)'
-const SHADOW_DEFAULT = '0 4px 24px rgba(0,0,0,0.08)'
+const SHADOW_DEFAULT = '0 20px 60px rgba(15,23,42,.06)'
 
 // ─── Service Card ─────────────────────────────────────────────────────────────
 interface ServiceCardProps {
@@ -49,10 +49,13 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       }}
       initial={{ boxShadow: SHADOW_DEFAULT }}
       className={cn(
-        'group relative flex flex-col rounded-2xl border border-[#E5E7EB] bg-white',
-        'p-10 transition-[border-color,box-shadow] duration-300',
-        'hover:border-[#4F46E5]/30'
-      )}
+  'group relative flex h-full flex-col rounded-[32px]',
+  'border border-[#ECEEF5] bg-white',
+  'p-12',
+  'transition-all duration-500',
+  'hover:-translate-y-2',
+  'hover:border-[#4F46E5]/20'
+)}
       style={{ boxShadow: SHADOW_DEFAULT }}
       role="article"
       aria-label={`Service: ${service.title}`}
@@ -68,31 +71,31 @@ function ServiceCard({ service, index }: ServiceCardProps) {
 
       {/* ── Icon container ── */}
       <div
-        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white"
+        className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl text-white"
         style={{ background: iconGradient }}
         aria-hidden="true"
       >
-        <IconComponent size={22} strokeWidth={2} />
+        <IconComponent size={34} strokeWidth={2} />
       </div>
 
       {/* ── Title ── */}
-      <h3 className="mt-6 text-3xl font-bold leading-tight text-[#0B0F1A]">
+      <h3 className="mt-10 text-[40px] leading-[1.05] font-bold leading-tight text-[#0B0F1A]">
         {service.title}
       </h3>
 
       {/* ── Tagline ── */}
-      <p className="mt-1 text-sm font-medium text-[#4F46E5]">{service.tagline}</p>
+      <p className="mt-4 text-base font-medium text-[#4F46E5]">{service.tagline}</p>
 
       {/* ── Description ── */}
-      <p className="mt-4 text-[17px] leading-8 text-[#6B7280]">
+      <p className="mt-10 gap-4 text-[18px] leading-9 text-[#6B7280]">
         {service.description}
       </p>
 
       {/* ── Divider ── */}
-      <div className="mt-6 border-t border-[#F1F3F9]" aria-hidden="true" />
+      <div className="mt-10 border-t border-[#F1F3F9]" aria-hidden="true" />
 
       {/* ── Capabilities list ── */}
-      <ul className="mt-6 flex flex-1 flex-col gap-2.5" aria-label={`${service.title} capabilities`}>
+      <ul className="mt-10 gap-4 flex flex-1 flex-col gap-2.5" aria-label={`${service.title} capabilities`}>
         {displayCapabilities.map((cap) => (
           <li key={cap} className="flex items-start gap-2.5">
             <Check
@@ -101,18 +104,18 @@ function ServiceCard({ service, index }: ServiceCardProps) {
               className="mt-0.5 shrink-0 text-[#4F46E5]"
               aria-hidden="true"
             />
-            <span className="text-sm text-[#374151]">{cap}</span>
+            <span className="text-base text-[#374151]">{cap}</span>
           </li>
         ))}
       </ul>
 
       {/* ── CTA Link ── */}
-      <div className="mt-8">
+      <div className="mt-10">
         <Link
           href={`/services/${service.slug}`}
           id={`service-cta-${service.slug}`}
           className={cn(
-            'inline-flex items-center gap-1.5 text-sm font-semibold text-[#4F46E5]',
+            'inline-flex items-center gap-1.5 text-base font-semibold text-[#4F46E5]',
             'transition-all duration-200 hover:gap-3 hover:underline underline-offset-2'
           )}
           aria-label={`Explore ${service.title} service`}
@@ -135,7 +138,7 @@ interface SectionHeaderProps {
 function SectionHeader({ eyebrow, title, subtitle }: SectionHeaderProps) {
   return (
     <div className="mb-16 text-center">
-      <span className="eyebrow mb-4 block text-sm font-semibold uppercase tracking-widest text-[#4F46E5]">
+      <span className="eyebrow mb-4 block text-base font-semibold uppercase tracking-widest text-[#4F46E5]">
         {eyebrow}
       </span>
       <h2 className="mb-5 text-4xl font-extrabold leading-tight tracking-tight text-[#0B0F1A] md:text-5xl">
@@ -193,7 +196,7 @@ export default function ServicesOverview() {
 
         {/* ── Cards grid ── */}
         <motion.div
-          className="grid grid-cols-1 gap-8 md:grid-cols-3"
+          className="grid grid-cols-1 gap-10 lg:grid-cols-3 items-stretch"
           variants={staggerContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
