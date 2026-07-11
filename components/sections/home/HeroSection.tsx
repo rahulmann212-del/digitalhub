@@ -33,7 +33,11 @@ const HEADLINE_LINES = [
   'Into Digital',
   'Success Stories'
 ]
-const GRADIENT_WORDS = new Set(['Real', 'Growth'])
+const GRADIENT_WORDS = new Set([
+  'Digital',
+  'Success',
+  'Stories',
+])
 
 // ─── Stat Chip ────────────────────────────────────────────────────────────────
 interface StatChipProps {
@@ -53,10 +57,10 @@ function StatChip({ icon, label }: StatChipProps) {
 // ─── Abstract SVG Illustration ────────────────────────────────────────────────
 function HeroDashboard() {
   return (
-    <div className="relative mx-auto w-full max-w-[520px]">
+    <div className="relative mx-auto w-full max-w-[650px] xl:max-w-[700px]">
 
       {/* Main Card */}
-      <div className="rounded-[32px] border border-white/70 bg-white/90 p-7 shadow-[0_30px_80px_rgba(37,99,235,0.18)] backdrop-blur-xl">
+      <div className="rounded-[36px] border border-white/80 bg-white/95 p-9 xl:p-10 shadow-[0_40px_120px_rgba(37,99,235,0.20)] backdrop-blur-2xl">
 
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -79,7 +83,7 @@ function HeroDashboard() {
           </p>
 
           <div className="mt-2 flex items-end gap-3">
-            <h2 className="text-5xl font-extrabold text-[#0B0F1A]">
+            <h2 className="text-6xl xl:text-7xl font-extrabold tracking-tight text-[#0B0F1A]">
               +247%
             </h2>
 
@@ -90,7 +94,7 @@ function HeroDashboard() {
         </div>
 
         {/* Chart */}
-        <div className="mt-8 flex h-40 items-end gap-3">
+        <div className="mt-10 flex h-56 items-end gap-4">
 
           {[35,52,48,66,72,88,104,96,120,140].map((h,index)=>(
             <div
@@ -218,22 +222,22 @@ export default function HeroSection() {
                   background: 'linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(124,58,237,0.06) 100%)',
                 }}
               >
-                ✦ Strategy • Design • Technology
+                ✦ Trusted By Businesses Worldwide
               </span>
             </motion.div>
 
             {/* ── Animated headline ── */}
             <motion.h1
-              className="mb-8 overflow-hidden max-w-[700px]"
+              className="mb-8 overflow-hidden max-w-[760px]"
               variants={wordContainer}
               style={{
-                fontSize: 'clamp(42px, 6vw, 72px)',
-                fontWeight: 800,
-                lineHeight: 1.05,
-                letterSpacing: '-0.03em',
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-              }}
-              aria-label="We Build Digital Products That Drive Real Growth"
+  fontSize: 'clamp(54px, 7vw, 82px)',
+  fontWeight: 800,
+  lineHeight: 1.08,
+  letterSpacing: '-0.04em',
+  fontFamily: "'Plus Jakarta Sans', sans-serif",
+}}
+              aria-label="Transforming Ideas Into Digital Success Stories"
             >
               {HEADLINE_LINES.map((line, lineIdx) => (
                 <span key={lineIdx} className="block">
@@ -260,7 +264,7 @@ export default function HeroSection() {
               variants={fadeUp}
               className="mb-10 max-w-[620px] text-lg leading-8 text-[#6B7280]"
             >
-              We design exceptional digital experiences that help ambitious brands grow faster, attract the right customers, and build long term competitive advantage through strategy, technology, and measurable execution.
+              We help ambitious businesses launch faster, generate qualified leads, and scale confidently through premium web development, performance marketing, and market intelligence.
             </motion.p>
 
             {/* ── CTA buttons ── */}
@@ -283,7 +287,7 @@ export default function HeroSection() {
                     background: 'linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)',
                   }}
                 >
-                  Book Free Strategy Call
+                  Start Your Project
                 </Link>
               </motion.div>
 
@@ -298,7 +302,7 @@ export default function HeroSection() {
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F1A] focus-visible:ring-offset-2'
                   )}
                 >
-                  Explore Case Studies
+                  View Our Work
                 </Link>
               </motion.div>
             </motion.div>
@@ -309,10 +313,10 @@ export default function HeroSection() {
               className="flex flex-wrap items-center gap-3"
             >
               {[
-                { icon: '🚀', label: '250+ Successful Projects' },
-                { icon: '🌎', label: 'Clients Across 20+ Countries' },
-                { icon: '💙', label: 'Trusted by Fast Growing Brands' },
-              ].map((chip) => (
+  { icon: '🏆', label: '150+ Projects Delivered' },
+  { icon: '⭐', label: '98% Client Retention' },
+  { icon: '🌍', label: '12 Countries Served' },
+].map((chip) => (
                 <motion.div key={chip.label} variants={fadeUp}>
                   <StatChip icon={chip.icon} label={chip.label} />
                 </motion.div>
@@ -351,7 +355,7 @@ export default function HeroSection() {
             </div>
 
             {/* ── Floating visual wrapper ── */}
-            <div className="animate-float relative z-10 h-[420px] w-[420px] md:h-[500px] md:w-[500px]">
+            <div className="animate-float relative z-10 w-full max-w-[560px]">
               {/* Main SVG Illustration */}
               <HeroDashboard />
             </div>
