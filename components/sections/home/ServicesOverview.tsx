@@ -24,10 +24,6 @@ const GRADIENT_MAP: Record<string, string> = {
   'market-research': 'linear-gradient(135deg, #38BDF8 0%, #2563EB 100%)',
 }
 
-// ─── Shadow brand (hover) ─────────────────────────────────────────────────────
-const SHADOW_BRAND = '0 16px 48px rgba(79, 70, 229, 0.22)'
-const SHADOW_DEFAULT = '0 20px 60px rgba(15,23,42,.06)'
-
 // ─── Service Card ─────────────────────────────────────────────────────────────
 interface ServiceCardProps {
   service: Service
@@ -42,93 +38,80 @@ function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <motion.div
       variants={fadeUp}
-      whileHover={{
-        scale: 1.02,
-        boxShadow: SHADOW_BRAND,
-        transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] as [number,number,number,number] },
-      }}
-      initial={{ boxShadow: SHADOW_DEFAULT }}
+      whileHover={{ y: -6, transition: { duration: 0.3 } }}
       className={cn(
-  'group relative flex min-h-[560px] flex-col rounded-[32px]',
-  'border border-[#ECEEF5] bg-white',
-  'px-10 py-12',
-  'transition-all duration-500',
-  'hover:-translate-y-2',
-  'hover:border-[#4F46E5]/20'
-)}
-      style={{ boxShadow: SHADOW_DEFAULT }}
+        'group relative flex h-full flex-col rounded-3xl',
+        'border border-slate-200/80 bg-white',
+        'p-8 lg:p-10',
+        'shadow-sm transition-all duration-300',
+        'hover:border-transparent hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.15)]'
+      )}
       role="article"
       aria-label={`Service: ${service.title}`}
     >
       {/* ── Gradient border overlay on hover (top accent line) ── */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-0.5 rounded-t-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-x-0 top-0 h-1.5 rounded-t-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background: 'linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)',
         }}
         aria-hidden="true"
       />
 
-      {/* ── Icon container ── */}
-      <div
-  className="absolute left-0 top-0 h-36 w-full rounded-t-[32px]"
-  style={{ background: iconGradient }}
->
-  <div className="flex h-full items-center justify-center">
-    <span className="text-lg font-bold uppercase tracking-[3px] text-white">
-      {service.shortTitle}
-    </span>
-  </div>
-</div>
-<div className="mt-40">
-  <span className="rounded-full bg-[#EEF2FF] px-4 py-2 text-sm font-medium text-[#4F46E5]">
-    {service.shortTitle}
-  </span>
-</div>
+      {/* ── Icon & Badge Row ── */}
+      <div className="mb-6 flex items-center justify-between">
+        <div
+          className="flex h-14 w-14 items-center justify-center rounded-2xl shadow-inner"
+          style={{ background: iconGradient }}
+        >
+          <IconComponent className="text-white" size={26} strokeWidth={2} />
+        </div>
+        <span className="rounded-full bg-slate-50 border border-slate-200 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+          {service.shortTitle}
+        </span>
+      </div>
+
       {/* ── Title ── */}
-      <h3 className="mt-6 text-[40px] font-extrabold leading-[1.08] tracking-[-0.03em] text-[#0B0F1A]">
+      <h3 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-slate-900">
         {service.title}
       </h3>
 
-      {/* ── Tagline ── */}
-      {/*<p className="mt-4 text-base font-medium text-[#4F46E5]">{service.tagline}</p>*/}
-
       {/* ── Description ── */}
-      <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+      <p className="mb-8 text-sm leading-relaxed text-slate-600 sm:text-base">
         {service.description}
       </p>
 
       {/* ── Divider ── */}
-      {/*<div className="mt-10 border-t border-[#F1F3F9]" aria-hidden="true" />*/}
+      <div className="mb-8 h-px w-full bg-slate-100" aria-hidden="true" />
 
       {/* ── Capabilities list ── */}
-      <ul className="mt-10 gap-4 flex flex-1 flex-col gap-2.5" aria-label={`${service.title} capabilities`}>
+      <ul className="mb-8 flex flex-col gap-3.5" aria-label={`${service.title} capabilities`}>
         {displayCapabilities.map((cap) => (
-          <li key={cap} className="flex items-start gap-2.5">
+          <li key={cap} className="flex items-start gap-3">
             <Check
               size={18}
               strokeWidth={2.5}
-              className="mt-0.5 shrink-0 text-[#4F46E5]"
+              className="mt-0.5 shrink-0 text-blue-600"
               aria-hidden="true"
             />
-            <span className="text-[17px] font-medium text-[#374151]">{cap}</span>
+            <span className="text-sm font-medium text-slate-700">{cap}</span>
           </li>
         ))}
       </ul>
 
       {/* ── CTA Link ── */}
-      <div className="mt-auto pt-8">
+      <div className="mt-auto">
         <Link
           href={`/services/${service.slug}`}
           id={`service-cta-${service.slug}`}
           className={cn(
-            'inline-flex items-center gap-1.5 text-base font-semibold text-[#4F46E5]',
-            'transition-all duration-200 hover:gap-3 hover:underline underline-offset-2'
+            'inline-flex items-center gap-2 text-sm font-bold text-blue-600',
+            'transition-all duration-300 hover:gap-3 hover:text-blue-800'
           )}
           aria-label={`Explore ${service.title} service`}
         >
           View Service
-          <ArrowRight size={14} strokeWidth={2.5} />
+          <ArrowRight size={16} strokeWidth={2.5} />
         </Link>
       </div>
     </motion.div>
@@ -144,14 +127,16 @@ interface SectionHeaderProps {
 
 function SectionHeader({ eyebrow, title, subtitle }: SectionHeaderProps) {
   return (
-    <div className="mb-16 text-center">
-      <span className="eyebrow mb-4 block text-base font-semibold uppercase tracking-widest text-[#4F46E5]">
-        {eyebrow}
+    <div className="mb-14 sm:mb-20 text-center">
+      <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#4F46E5]/15 bg-[#4F46E5]/5 px-4 py-1.5 text-xs font-semibold text-[#4F46E5]">
+        <span className="animate-pulse">✦</span> {eyebrow}
       </span>
-      <h2 className="mb-5 text-4xl font-extrabold leading-tight tracking-tight text-[#0B0F1A] md:text-5xl">
+      <h2 className="mb-5 text-4xl sm:text-5xl font-extrabold leading-tight tracking-tighter text-slate-900">
         {title}
       </h2>
-      <p className="mx-auto max-w-xl text-lg text-[#6B7280]">{subtitle}</p>
+      <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600">
+        {subtitle}
+      </p>
     </div>
   )
 }
@@ -165,10 +150,13 @@ export default function ServicesOverview() {
     <section
       ref={sectionRef}
       id="services-overview"
-      className="section-padding bg-[#FFFFFF]"
+      className="relative overflow-hidden bg-white py-20 sm:py-28"
       aria-label="Services overview"
     >
-      <div className="container-xl">
+      {/* Optional subtle background element */}
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-50/50 blur-[100px]" aria-hidden="true" />
+
+      <div className="container mx-auto px-4 sm:px-6">
 
         {/* ── Section Header ── */}
         <motion.div
@@ -178,19 +166,11 @@ export default function ServicesOverview() {
         >
           <motion.div variants={fadeUp}>
             <SectionHeader
-              eyebrow="✦ What We Do"
+              eyebrow="What We Do"
               title={
                 <>
                   End-to-End{' '}
-                  <span
-                    className="gradient-brand-text"
-                    style={{
-                      background: 'linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
+                  <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
                     Digital
                   </span>{' '}
                   Services
@@ -203,7 +183,7 @@ export default function ServicesOverview() {
 
         {/* ── Cards grid ── */}
         <motion.div
-          className="mx-auto grid max-w-[1450px] grid-cols-1 gap-8 lg:grid-cols-[1fr_1fr_1fr]"
+          className="mx-auto grid max-w-[1280px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
           variants={staggerContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -215,30 +195,30 @@ export default function ServicesOverview() {
 
         {/* ── Bottom CTA row ── */}
         <motion.div
-          className="mt-14 text-center"
+          className="mt-16 sm:mt-20 text-center"
           variants={fadeUp}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          transition={{ delay: 0.45 }}
+          transition={{ delay: 0.4 }}
         >
-          <p className="mb-5 text-base text-[#6B7280]">
+          <p className="mb-5 text-sm font-medium text-slate-500">
             Not sure which service is right for you?
           </p>
           <Link
             href="/contact"
             id="services-cta-consult"
             className={cn(
-              'inline-flex items-center gap-2 rounded-full px-8 py-4',
-              'text-base font-semibold text-white',
-              'shadow-[0_8px_32px_rgba(37,99,235,0.30)]',
-              'transition-all duration-300 hover:shadow-[0_12px_40px_rgba(37,99,235,0.45)] hover:scale-105'
+              'group inline-flex items-center justify-center rounded-full px-8 py-3.5',
+              'text-sm font-semibold text-white',
+              'transition-all duration-300 ease-in-out',
+              'shadow-[0_8px_20px_rgba(37,99,235,0.2)] hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(37,99,235,0.35)]'
             )}
             style={{
               background: 'linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)',
             }}
           >
             Book a Free Consultation
-            <ArrowRight size={16} strokeWidth={2.5} />
+            <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" size={16} strokeWidth={2.5} />
           </Link>
         </motion.div>
 
