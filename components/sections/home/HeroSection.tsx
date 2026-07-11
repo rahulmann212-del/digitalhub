@@ -133,86 +133,205 @@ function HeroDashboard() {
 
 </div>
 
-        {/* Chart */}
-        <div className="mt-10 flex h-56 items-end gap-4">
+{/* Analytics Chart */}
 
-          {[35,52,48,66,72,88,104,96,120,140].map((h,index)=>(
-            <div
-              key={index}
-              className="flex-1 rounded-t-full bg-gradient-to-t from-[#2563EB] to-[#7C3AED]"
-              style={{height:h}}
-            />
-          ))}
+<div className="mt-8 rounded-3xl bg-[#F8FAFC] p-5">
 
-        </div>
+  <div className="mb-4 flex items-center justify-between">
 
-        {/* Bottom Stats */}
+    <span className="text-sm font-semibold text-[#0B0F1A]">
+      Performance Trend
+    </span>
 
-        <div className="mt-8 grid grid-cols-3 gap-4">
+    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+      +24%
+    </span>
 
-          <div className="rounded-2xl bg-[#F8FAFC] p-4">
-            <p className="text-xs text-gray-500">
-              Leads
-            </p>
+  </div>
 
-            <h4 className="mt-2 text-2xl font-bold">
-              4.8K
-            </h4>
-          </div>
+  <svg
+    viewBox="0 0 320 140"
+    className="w-full"
+    fill="none"
+  >
 
-          <div className="rounded-2xl bg-[#F8FAFC] p-4">
-            <p className="text-xs text-gray-500">
-              Conversion
-            </p>
+    <defs>
 
-            <h4 className="mt-2 text-2xl font-bold">
-              18%
-            </h4>
-          </div>
+      <linearGradient
+        id="lineGradient"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0"
+      >
+        <stop offset="0%" stopColor="#2563EB" />
+        <stop offset="100%" stopColor="#7C3AED" />
+      </linearGradient>
 
-          <div className="rounded-2xl bg-[#F8FAFC] p-4">
-            <p className="text-xs text-gray-500">
-              SEO Score
-            </p>
+      <linearGradient
+        id="fillGradient"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1"
+      >
+        <stop offset="0%" stopColor="#2563EB" stopOpacity="0.20"/>
+        <stop offset="100%" stopColor="#2563EB" stopOpacity="0"/>
+      </linearGradient>
 
-            <h4 className="mt-2 text-2xl font-bold">
-              97
-            </h4>
-          </div>
+    </defs>
 
-        </div>
+    <path
+      d="M0 120
+         C40 110 70 95 95 90
+         S150 60 185 55
+         S250 40 320 15
+         L320 140
+         L0 140Z"
+      fill="url(#fillGradient)"
+    />
 
+    <path
+      d="M0 120
+         C40 110 70 95 95 90
+         S150 60 185 55
+         S250 40 320 15"
+      stroke="url(#lineGradient)"
+      strokeWidth="4"
+      strokeLinecap="round"
+    />
+
+    <circle cx="320" cy="15" r="6" fill="#2563EB"/>
+
+  </svg>
+
+</div>
+
+        {/* KPI Cards */}
+
+<div className="mt-8 grid grid-cols-3 gap-4">
+
+  {[
+    {
+      title: 'Leads',
+      value: '4.8K',
+      color: 'bg-blue-100',
+      icon: '📈',
+    },
+    {
+      title: 'Sales',
+      value: '$320K',
+      color: 'bg-violet-100',
+      icon: '💰',
+    },
+    {
+      title: 'ROI',
+      value: '6.4x',
+      color: 'bg-emerald-100',
+      icon: '🚀',
+    },
+  ].map((item) => (
+
+    <div
+      key={item.title}
+      className="rounded-3xl border border-[#EEF2F7] bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+    >
+
+      <div
+        className={`mb-3 flex h-10 w-10 items-center justify-center rounded-2xl ${item.color}`}
+      >
+        <span className="text-lg">
+          {item.icon}
+        </span>
       </div>
 
-      {/* Floating Card */}
+      <p className="text-xs text-gray-500">
+        {item.title}
+      </p>
 
-      <div className="absolute -left-12 top-16 rounded-3xl bg-white p-5 shadow-xl">
-
-        <p className="text-xs text-gray-500">
-          Organic Traffic
-        </p>
-
-        <h3 className="mt-2 text-3xl font-bold text-green-600">
-          +184%
-        </h3>
-
-      </div>
-
-      {/* Floating Card */}
-
-      <div className="absolute -right-10 bottom-10 rounded-3xl bg-white p-5 shadow-xl">
-
-        <p className="text-xs text-gray-500">
-          Active Users
-        </p>
-
-        <h3 className="mt-2 text-3xl font-bold text-[#2563EB]">
-          24K
-        </h3>
-
-      </div>
+      <h4 className="mt-1 text-2xl font-bold text-[#0B0F1A]">
+        {item.value}
+      </h4>
 
     </div>
+
+  ))}
+
+</div>
+
+      {/* Floating Analytics Card */}
+
+<div className="absolute -left-16 top-10 w-56 rounded-[28px] border border-white/70 bg-white/95 p-5 shadow-[0_25px_60px_rgba(37,99,235,0.15)] backdrop-blur-xl">
+
+  <div className="flex items-center justify-between">
+
+    <div>
+      <p className="text-xs text-gray-500">
+        Organic Growth
+      </p>
+
+      <h3 className="mt-2 text-3xl font-bold text-[#16A34A]">
+        +184%
+      </h3>
+    </div>
+
+    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-100 text-xl">
+      📈
+    </div>
+
+  </div>
+
+  <div className="mt-5 h-2 overflow-hidden rounded-full bg-gray-200">
+
+    <div
+      className="h-full rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED]"
+      style={{ width: '82%' }}
+    />
+
+  </div>
+
+  <p className="mt-3 text-xs text-gray-500">
+    Monthly performance
+  </p>
+
+</div>
+
+{/* Floating Clients Card */}
+
+<div className="absolute -right-12 bottom-8 w-56 rounded-[28px] border border-white/70 bg-white/95 p-5 shadow-[0_25px_60px_rgba(124,58,237,0.18)] backdrop-blur-xl">
+
+  <div className="flex items-center justify-between">
+
+    <div>
+      <p className="text-xs text-gray-500">
+        Active Clients
+      </p>
+
+      <h3 className="mt-2 text-3xl font-bold text-[#2563EB]">
+        240+
+      </h3>
+    </div>
+
+    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-xl">
+      🚀
+    </div>
+
+  </div>
+
+  <div className="mt-5 flex gap-1">
+
+    <span className="h-2 w-8 rounded-full bg-[#2563EB]" />
+    <span className="h-2 w-5 rounded-full bg-[#60A5FA]" />
+    <span className="h-2 w-12 rounded-full bg-[#7C3AED]" />
+    <span className="h-2 flex-1 rounded-full bg-gray-200" />
+
+  </div>
+
+  <p className="mt-3 text-xs text-gray-500">
+    Global portfolio
+  </p>
+
+</div>
   )
 }
 // ─── SVG dot-grid background ──────────────────────────────────────────────────
