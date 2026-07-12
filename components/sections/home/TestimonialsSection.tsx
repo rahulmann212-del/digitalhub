@@ -4,74 +4,10 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { staggerContainer, fadeUp } from '@/lib/animations'
+import { testimonials } from '@/lib/data/testimonials'
+import type { Testimonial } from '@/types'
 import { Quote } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-// ---------------------------------------------------------------------------
-// Local Testimonials Data (Updated with your provided names)
-// ---------------------------------------------------------------------------
-const localTestimonials = [
-  {
-    id: '1',
-    author: 'Sanjay',
-    title: 'Director',
-    company: 'Swastik Group',
-    rating: 5,
-    initials: 'S',
-    gradient: 'from-blue-500 to-cyan-500',
-    quote: 'Their strategic approach to our online sales operations was incredible. They helped us optimize our margins and scale efficiently without losing focus on quality.'
-  },
-  {
-    id: '2',
-    author: 'Prajneesh',
-    title: 'Manager',
-    company: 'P&S Intelligence',
-    rating: 5,
-    initials: 'P',
-    gradient: 'from-purple-500 to-indigo-500',
-    quote: 'The data-driven insights they provided for our multi-vendor setup were game-changing. We saw a massive improvement in overall platform performance.'
-  },
-  {
-    id: '3',
-    author: 'Ankita',
-    title: 'Director',
-    company: 'Avanya Group',
-    rating: 5,
-    initials: 'A',
-    gradient: 'from-rose-400 to-red-500',
-    quote: 'They helped us scale our direct-to-consumer brand faster than we thought possible. Their execution is flawless and perfectly tailored to our market.'
-  },
-  {
-    id: '4',
-    author: 'Brijesh',
-    title: 'Co-founder',
-    company: 'Shivay Services',
-    rating: 5,
-    initials: 'B',
-    gradient: 'from-emerald-400 to-teal-500',
-    quote: 'Thanks to their digital strategies, our operational overheads and return-to-origin costs dropped dramatically, boosting our overall profitability.'
-  },
-  {
-    id: '5',
-    author: 'Harshit',
-    title: 'Manager',
-    company: 'NVA Restaurant',
-    rating: 5,
-    initials: 'H',
-    gradient: 'from-amber-400 to-orange-500',
-    quote: 'A truly professional team that understands how to drive targeted footfall and convert digital traffic into highly loyal, returning customers.'
-  },
-  {
-    id: '6',
-    author: 'Neha',
-    title: 'Team Lead',
-    company: 'Ralhi Travels',
-    rating: 5,
-    initials: 'N',
-    gradient: 'from-pink-500 to-rose-400',
-    quote: 'The visual campaigns and marketing scripts they designed completely elevated our corporate branding. The engagement we are seeing now is phenomenal.'
-  }
-]
 
 // ---------------------------------------------------------------------------
 // StarRating
@@ -116,7 +52,7 @@ function Avatar({ initials, gradient }: { initials: string; gradient: string }) 
 // TestimonialCard
 // ---------------------------------------------------------------------------
 
-function TestimonialCard({ testimonial }: { testimonial: typeof localTestimonials[0] }) {
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const { quote, author, title, company, rating, initials, gradient } = testimonial
 
   return (
@@ -202,7 +138,7 @@ export default function TestimonialsSection() {
           viewport={{ once: true, amount: 0.1 }}
           className="mx-auto grid max-w-[1280px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {localTestimonials.map((t) => (
+          {testimonials.map((t) => (
             <TestimonialCard key={t.id} testimonial={t} />
           ))}
         </motion.div>
