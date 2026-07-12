@@ -1,10 +1,11 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Map, Layers, Rocket, BarChart } from 'lucide-react';
-import { SectionHeader } from '@/components/ui/SectionHeader';
-import { staggerContainer, fadeUp } from '@/lib/animations';
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Search, Map, Layers, Rocket, BarChart } from 'lucide-react'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { staggerContainer, fadeUp } from '@/lib/animations'
+import { cn } from '@/lib/utils'
 
 // ---------------------------------------------------------------------------
 // Data
@@ -51,7 +52,7 @@ const steps = [
     duration: 'Ongoing',
     Icon: BarChart,
   },
-] as const;
+] as const
 
 // ---------------------------------------------------------------------------
 // StepCard
@@ -63,79 +64,85 @@ function StepCard({
   isActive,
   onClick,
 }: {
-  step: (typeof steps)[number];
-  index: number;
-  isActive: boolean;
-  onClick: () => void;
+  step: (typeof steps)[number]
+  index: number
+  isActive: boolean
+  onClick: () => void
 }) {
-  const { number, title, description, duration, Icon } = step;
+  const { number, title, description, duration, Icon } = step
 
   return (
     <motion.div
       variants={fadeUp}
       custom={index}
       onClick={onClick}
-      className={[
-        'relative flex flex-col rounded-2xl border p-8 shadow-sm transition-all duration-300 cursor-pointer select-none',
+      className={cn(
+        'group relative flex h-full cursor-pointer select-none flex-col rounded-[24px] p-6 lg:p-8',
+        'border transition-all duration-300',
         isActive
-          ? 'border-[#4F46E5] bg-white shadow-[0_8px_32px_rgba(79,70,229,0.18)]'
-          : 'border-[#E5E7EB] bg-white hover:shadow-md hover:-translate-y-0.5',
-      ].join(' ')}
+          ? 'border-blue-500/30 bg-white shadow-[0_16px_40px_-10px_rgba(37,99,235,0.2)]'
+          : 'border-slate-200/70 bg-white hover:-translate-y-1 hover:border-slate-300 hover:shadow-md'
+      )}
     >
-      {/* Step number */}
-      <span
-        className="text-5xl font-extrabold leading-none bg-[linear-gradient(135deg,#2563EB_0%,#7C3AED_100%)] bg-clip-text text-transparent"
-        aria-hidden="true"
-      >
-        {number}
-      </span>
+      {/* ── Number & Icon Row ── */}
+      <div className="mb-6 flex items-start justify-between">
+        <span
+          className="text-5xl font-extrabold tracking-tighter text-slate-100 transition-colors group-hover:text-blue-50"
+          aria-hidden="true"
+        >
+          {number}
+        </span>
+        <span
+          className={cn(
+            'inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 shadow-sm',
+            isActive 
+              ? 'bg-gradient-to-br from-blue-600 to-violet-600 scale-110' 
+              : 'bg-slate-50 border border-slate-100 group-hover:bg-blue-50'
+          )}
+        >
+          <Icon
+            size={22}
+            className={isActive ? 'text-white' : 'text-slate-500 group-hover:text-blue-600'}
+            strokeWidth={2}
+          />
+        </span>
+      </div>
 
-      {/* Icon */}
-      <span
-        className={[
-          'mt-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-300',
-          isActive ? 'bg-[#4F46E5]' : 'bg-[#EEF2FF]',
-        ].join(' ')}
-      >
-        <Icon
-          size={20}
-          className={isActive ? 'text-white' : 'text-[#4F46E5]'}
-          strokeWidth={2}
-        />
-      </span>
+      {/* ── Title ── */}
+      <h3 className={cn(
+        "mb-3 text-xl font-bold leading-tight tracking-tight",
+        isActive ? "text-blue-700" : "text-slate-900"
+      )}>
+        {title}
+      </h3>
 
-      {/* Text */}
-      <h3 className="mt-4 text-base font-bold text-[#0B0F1A]">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-[#374151]">{description}</p>
+      {/* ── Description ── */}
+      <p className="mb-6 text-sm leading-relaxed text-slate-600 flex-1">
+        {description}
+      </p>
 
-      {/* Duration chip */}
-      <span className="mt-5 self-start rounded-full bg-[#F1F3F9] px-3 py-1 text-xs font-medium text-[#6B7280]">
-        {duration}
-      </span>
+      {/* ── Duration ── */}
+      <div className="mt-auto pt-4 border-t border-slate-100">
+        <span className={cn(
+          "inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider",
+          isActive 
+            ? "bg-blue-100 text-blue-700" 
+            : "bg-slate-100 text-slate-500"
+        )}>
+          {duration}
+        </span>
+      </div>
 
-      {/* Active indicator bar */}
+      {/* ── Active Bottom Border ── */}
       {isActive && (
-        <motion.span
-          layoutId="step-active-bar"
-          className="absolute bottom-0 left-6 right-6 h-[3px] rounded-t-full bg-[linear-gradient(135deg,#2563EB_0%,#7C3AED_100%)]"
+        <motion.div
+          layoutId="active-step-indicator"
+          className="absolute bottom-0 left-1/2 h-1.5 w-1/2 -translate-x-1/2 rounded-t-full bg-gradient-to-r from-blue-600 to-violet-600"
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
       )}
     </motion.div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Connector — desktop only
-// ---------------------------------------------------------------------------
-
-function StepConnector() {
-  return (
-    <div className="hidden lg:flex items-center self-start mt-[3.25rem] shrink-0">
-      <span className="block h-px w-6 bg-[#E5E7EB]" />
-      <span className="block h-2 w-2 rounded-full bg-[#C7D2FE]" />
-      <span className="block h-px w-6 bg-[#E5E7EB]" />
-    </div>
-  );
+  )
 }
 
 // ---------------------------------------------------------------------------
@@ -143,58 +150,73 @@ function StepConnector() {
 // ---------------------------------------------------------------------------
 
 export default function ProcessSection() {
-  const [active, setActive] = useState<number>(0);
+  const [active, setActive] = useState<number>(0)
 
   return (
-    <section className="bg-[#F8F9FC] section-padding">
-      <div className="container-xl">
+    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-24 border-t border-slate-200/50">
+      <div className="container mx-auto px-4 sm:px-6">
+        
         {/* Header */}
-        <SectionHeader
-          eyebrow="How We Work"
-          title="A Process Built for **Results**"
-          subtitle="Every engagement follows a proven framework that ensures alignment, quality, and on-time delivery."
-        />
+        <div className="mb-12 sm:mb-16 text-center">
+          <SectionHeader
+            eyebrow="How We Work"
+            title="A Process Built for Results"
+            subtitle="Every engagement follows a proven framework that ensures alignment, quality, and on-time delivery."
+          />
+        </div>
 
-        {/* Steps */}
+        {/* ── Responsive Grid Layout ── */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="mt-14 flex flex-col gap-4 lg:flex-row lg:gap-0 lg:items-stretch"
+          className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-6"
         >
-          {steps.map((step, i) => (
-            <React.Fragment key={step.number}>
-              <div className="lg:flex-1">
-                <StepCard
-                  step={step}
-                  index={i}
-                  isActive={active === i}
-                  onClick={() => setActive(i)}
-                />
-              </div>
-              {i < steps.length - 1 && <StepConnector />}
-            </React.Fragment>
-          ))}
+          {/* Top Row: 3 Cards */}
+          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {steps.slice(0, 3).map((step, i) => (
+              <StepCard
+                key={step.number}
+                step={step}
+                index={i}
+                isActive={active === i}
+                onClick={() => setActive(i)}
+              />
+            ))}
+          </div>
+
+          {/* Bottom Row: 2 Cards (Centered) */}
+          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:w-2/3">
+            {steps.slice(3, 5).map((step, i) => (
+              <StepCard
+                key={step.number}
+                step={step}
+                index={i + 3} // Maintain correct index for animation and active state
+                isActive={active === i + 3}
+                onClick={() => setActive(i + 3)}
+              />
+            ))}
+          </div>
         </motion.div>
 
-        {/* Mobile progress dots */}
-        <div className="mt-6 flex justify-center gap-2 lg:hidden">
+        {/* ── Mobile Progress Indicators ── */}
+        <div className="mt-10 flex justify-center gap-2.5 lg:hidden">
           {steps.map((_, i) => (
             <button
               key={i}
-              aria-label={`Go to step ${i + 1}`}
+              aria-label={`View step ${i + 1}`}
               onClick={() => setActive(i)}
-              className={[
+              className={cn(
                 'h-2 rounded-full transition-all duration-300',
                 active === i
-                  ? 'w-6 bg-[#4F46E5]'
-                  : 'w-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]',
-              ].join(' ')}
+                  ? 'w-8 bg-blue-600'
+                  : 'w-2 bg-slate-300 hover:bg-slate-400'
+              )}
             />
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }
