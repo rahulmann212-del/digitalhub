@@ -34,20 +34,22 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
         'hover:border-blue-500/30 hover:shadow-[0_12px_30px_-10px_rgba(37,99,235,0.15)]'
       )}
     >
-      {/* ── Dynamic Layout: Large screens pe Horizontal, Small pe Vertical ── */}
       <Link 
         href={`/work/${study.slug}`} 
         className={cn("flex h-full", isLarge ? "flex-col lg:flex-row" : "flex-col")}
       >
         {/* ── Card Body (Text Area) ── */}
-        <div className={cn("flex flex-1 flex-col justify-center p-6", isLarge ? "lg:p-10 lg:pr-12" : "lg:p-8")}>
+        <div className={cn(
+          "flex flex-col justify-start", 
+          isLarge ? "flex-[1.5] p-8 lg:p-12" : "flex-1 p-6"
+        )}>
           
           {/* Tags */}
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="mb-5 flex flex-wrap gap-2">
             {study.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-500"
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500"
               >
                 {tag}
               </span>
@@ -55,25 +57,35 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
           </div>
 
           {/* Title & Client */}
-          <p className="mb-1.5 text-xs font-semibold tracking-wide text-slate-400 uppercase">
+          <p className="mb-2 text-xs font-semibold tracking-wide text-slate-400 uppercase">
             {study.client}
           </p>
           <h3
             className={cn(
               'font-bold leading-tight tracking-tight text-slate-900',
-              isLarge ? 'text-2xl lg:text-4xl mb-4' : 'text-xl'
+              isLarge ? 'text-3xl lg:text-4xl mb-3' : 'text-xl mb-2'
             )}
           >
             {study.title}
           </h3>
 
           {/* Key result tagline */}
-          <p className={cn("mt-2 font-semibold text-blue-600", isLarge ? "text-base lg:text-lg" : "text-sm sm:text-base")}>
+          <p className={cn(
+            "font-medium text-blue-600", 
+            isLarge ? "text-lg lg:text-xl" : "text-sm"
+          )}>
             {study.tagline}
           </p>
 
+          {/* Services List for Large Card */}
+          {isLarge && (
+            <p className="mt-4 text-sm font-medium text-slate-500">
+              {study.services.join(' • ')}
+            </p>
+          )}
+
           {/* CTA link */}
-          <div className={cn("mt-auto pt-6", isLarge ? "lg:mt-8 lg:pt-0" : "")}>
+          <div className="mt-auto pt-8">
             <div className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-blue-800">
               View Case Study
               <ArrowRight size={16} strokeWidth={2.5} />
@@ -81,29 +93,34 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
           </div>
         </div>
 
-        {/* ── Metric Display Area (Numbers Area) ── */}
+        {/* ── Metric Display Area ── */}
         <div
           className={cn(
             'relative flex flex-col items-center justify-center overflow-hidden bg-slate-50/50 text-center',
             isLarge 
-              ? 'border-t lg:border-t-0 lg:border-l border-slate-100 p-8 lg:w-[340px] shrink-0' 
+              ? 'flex-1 border-t lg:border-t-0 lg:border-l border-slate-100 p-10 lg:p-12' 
               : 'border-t border-slate-100 p-6'
           )}
         >
+          {/* Subtle Background Decoration for Large Card */}
+          {isLarge && (
+             <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at center, #E2E8F0 2px, transparent 2px)', backgroundSize: '24px 24px' }} />
+          )}
+
           {/* Metric value */}
           <span
             className={cn(
               'relative font-extrabold tracking-tight text-slate-900',
-              isLarge ? 'text-5xl lg:text-6xl' : 'text-3xl'
+              isLarge ? 'text-6xl lg:text-7xl' : 'text-3xl'
             )}
           >
             {metric.value}
           </span>
-          <span className="mt-2 relative text-[10px] font-bold uppercase tracking-widest text-slate-500">
+          <span className="mt-3 relative text-xs font-bold uppercase tracking-widest text-slate-500">
             {metric.label}
           </span>
           {metric.change && (
-            <span className="mt-1 relative text-xs font-medium text-slate-400">
+            <span className="mt-1.5 relative text-sm font-medium text-slate-400">
               {metric.change}
             </span>
           )}
@@ -118,6 +135,7 @@ function CaseStudyCard({ study, variant = 'small', index }: CaseStudyCardProps) 
 export default function WorkPreview() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
+  // Total 4 studies fetch kar rahe hain
   const studies = getFeaturedCaseStudies().slice(0, 4)
 
   const [primary, ...secondary] = studies
@@ -138,33 +156,26 @@ export default function WorkPreview() {
           subtitle="A selection of our most impactful recent engagements, each built around a specific business challenge."
         />
 
-        {/* Grid */}
+        {/* ── Redesigned Grid Layout ── */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="mx-auto mt-12 grid max-w-[1200px] grid-cols-1 gap-6 lg:grid-cols-3"
+          className="mx-auto mt-12 flex max-w-[1200px] flex-col gap-6 lg:gap-8"
         >
-          {/* Large primary card — spans 2 cols on lg */}
+          {/* 1. Large Primary Card — Full Width Banner */}
           {primary && (
-            <div className="lg:col-span-2">
+            <div className="w-full">
               <CaseStudyCard study={primary} variant="large" index={0} />
             </div>
           )}
 
-          {/* Smaller cards stacked in right column */}
+          {/* 2. Smaller Cards — Neat 3-Column Grid */}
           {secondary.length > 0 && (
-            <div className="flex flex-col gap-6">
-              {secondary.slice(0, 2).map((study, i) => (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {secondary.map((study, i) => (
                 <CaseStudyCard key={study.id} study={study} variant="small" index={i + 1} />
               ))}
-            </div>
-          )}
-
-          {/* Fourth card — full width on sm, 3-col span on lg */}
-          {studies[3] && (
-            <div className="lg:col-span-3">
-              <CaseStudyCard study={studies[3]} variant="large" index={3} />
             </div>
           )}
         </motion.div>
