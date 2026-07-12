@@ -80,24 +80,31 @@ function StepCard({
         'group relative flex h-full cursor-pointer select-none flex-col rounded-[24px] p-6 lg:p-8',
         'border transition-all duration-300',
         isActive
-          ? 'border-blue-500/30 bg-white shadow-[0_16px_40px_-10px_rgba(37,99,235,0.2)]'
-          : 'border-slate-200/70 bg-white hover:-translate-y-1 hover:border-slate-300 hover:shadow-md'
+          ? 'z-10 scale-[1.02] border-blue-500/40 bg-white shadow-[0_20px_40px_-10px_rgba(37,99,235,0.15)]'
+          : 'border-slate-200/70 bg-slate-100 hover:-translate-y-1 hover:border-slate-300 hover:bg-slate-50 hover:shadow-md'
       )}
     >
       {/* ── Number & Icon Row ── */}
       <div className="mb-6 flex items-start justify-between">
+        {/* Number - Ab visible aur dark hoga */}
         <span
-          className="text-5xl font-extrabold tracking-tighter text-slate-100 transition-colors group-hover:text-blue-50"
-          aria-hidden="true"
+          className={cn(
+            "text-5xl font-extrabold tracking-tighter transition-colors",
+            isActive 
+              ? "bg-gradient-to-br from-blue-600 to-violet-600 bg-clip-text text-transparent" 
+              : "text-slate-300 group-hover:text-slate-400"
+          )}
         >
           {number}
         </span>
+
+        {/* Icon Container */}
         <span
           className={cn(
             'inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 shadow-sm',
             isActive 
               ? 'bg-gradient-to-br from-blue-600 to-violet-600 scale-110' 
-              : 'bg-slate-50 border border-slate-100 group-hover:bg-blue-50'
+              : 'bg-white border border-slate-200 group-hover:bg-blue-50'
           )}
         >
           <Icon
@@ -110,7 +117,7 @@ function StepCard({
 
       {/* ── Title ── */}
       <h3 className={cn(
-        "mb-3 text-xl font-bold leading-tight tracking-tight",
+        "mb-3 text-xl font-bold leading-tight tracking-tight transition-colors",
         isActive ? "text-blue-700" : "text-slate-900"
       )}>
         {title}
@@ -122,12 +129,12 @@ function StepCard({
       </p>
 
       {/* ── Duration ── */}
-      <div className="mt-auto pt-4 border-t border-slate-100">
+      <div className="mt-auto pt-4 border-t border-slate-200/60">
         <span className={cn(
-          "inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider",
+          "inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider transition-colors",
           isActive 
             ? "bg-blue-100 text-blue-700" 
-            : "bg-slate-100 text-slate-500"
+            : "bg-slate-200 text-slate-600"
         )}>
           {duration}
         </span>
@@ -153,7 +160,7 @@ export default function ProcessSection() {
   const [active, setActive] = useState<number>(0)
 
   return (
-    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-24 border-t border-slate-200/50">
+    <section className="relative overflow-hidden bg-white py-16 sm:py-24 border-t border-slate-200/50">
       <div className="container mx-auto px-4 sm:px-6">
         
         {/* Header */}
@@ -192,7 +199,7 @@ export default function ProcessSection() {
               <StepCard
                 key={step.number}
                 step={step}
-                index={i + 3} // Maintain correct index for animation and active state
+                index={i + 3} 
                 isActive={active === i + 3}
                 onClick={() => setActive(i + 3)}
               />
